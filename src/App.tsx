@@ -13,6 +13,12 @@ function App() {
           <div className="gradient-box" />
         </div>
       </div>
+
+      <div className="colors-box">
+        <span>Colors:</span>
+
+        <ul></ul>
+      </div>
     </div>
   );
 }
