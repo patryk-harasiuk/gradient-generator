@@ -1,6 +1,15 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [colors, setColors] = useState([
+    "hsl(240deg 100% 20%)",
+    "hsl(55deg 100% 50%)",
+  ]);
+
+  const colorStops = colors.join(", ");
+  const backgroundImage = `linear-gradient(${colorStops})`;
+
   return (
     <div className="wrapper">
       <div className="heading-wrapper">
