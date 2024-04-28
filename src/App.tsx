@@ -1,11 +1,10 @@
 import "./App.css";
 import { useState } from "react";
+import { range } from "./utils/range";
+import { ColorPickerButton } from "./components/ColorPickerButton";
 
 function App() {
-  const [colors, setColors] = useState([
-    "hsl(240deg 100% 20%)",
-    "hsl(55deg 100% 50%)",
-  ]);
+  const [colors, setColors] = useState(["#000066", "FFEA00"]);
 
   const colorStops = colors.join(", ");
   const backgroundImage = `linear-gradient(${colorStops})`;
@@ -26,7 +25,15 @@ function App() {
       <div className="colors-box">
         <span>Colors:</span>
 
-        <ul></ul>
+        <ul>
+          {range(1, 5).map((_, index) => {
+            return (
+              <li key={index}>
+                <ColorPickerButton />
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

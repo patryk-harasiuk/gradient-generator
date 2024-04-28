@@ -52,6 +52,8 @@
   --color-gray-700: hsl(210deg, 14%, 66%);
   --color-gray-900: hsl(210deg, 25%, 88%);
   --color-gray-1000: hsl(210deg, 25%, 96%);
+
+  --border-color: hsl(210deg, 10%, 40%);
 }
 
 body {
@@ -60,6 +62,20 @@ body {
   place-items: center;
   min-height: 100vh;
   position: relative;
+}
+
+/* dialog.o-dialog::backdrop {
+  @apply fixed left-0 top-0 h-full w-full bg-black/20;
+} */
+
+dialog::backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.2;
 }
 
 .wrapper {

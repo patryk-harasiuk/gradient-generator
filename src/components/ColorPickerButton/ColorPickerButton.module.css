@@ -1,0 +1,22 @@
+.button {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1/1;
+  min-height: 60px;
+  border-radius: 6px;
+  border: 3px solid var(--border-color);
+  background: var(--color-background);
+}
+
+.colorBox {
+  --background: hsl(0deg 100% 50%);
+
+  position: absolute;
+  inset: 3px;
+
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border-radius: 2px;
+  background: var(--background);
+}
