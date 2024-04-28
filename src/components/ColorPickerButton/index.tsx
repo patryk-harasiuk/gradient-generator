@@ -7,7 +7,17 @@ export const ColorPickerButton = () => {
 
   return (
     <button className={styles.button} type="button">
-      <div className={styles.colorBox} />
+      {/* <div className={styles.colorBox} /> */}
+
+      <input
+        className={styles.colorBox}
+        type="color"
+        value={color}
+        onChange={(e) => {
+          console.log(e.target.value, "value");
+          setColor(e.target.value);
+        }}
+      />
     </button>
   );
 };

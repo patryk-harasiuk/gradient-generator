@@ -1,0 +1,51 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  min-height: 1.625rem;
+}
+
+.input {
+  --handle-color: var(--color-gray-900);
+  --handle-size: 16px;
+  --track-size: 3px;
+
+  display: block;
+  width: 100%;
+  background: transparent;
+  appearance: none;
+  outline-offset: 6px;
+  outline-color: var(--color-text);
+  cursor: pointer;
+
+  @media (max-width: 35rem) {
+    --handle-size: 24px;
+  }
+}
+
+.input::-webkit-slider-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  position: relative;
+  background: var(--handle-color);
+  width: var(--handle-size);
+  height: var(--handle-size);
+  border-radius: 9999px;
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.input::-webkit-slider-runnable-track {
+  position: relative;
+  height: var(--track-size);
+  background: var(--color-gray-300);
+  border-radius: 6px;
+}
+
+.input::-moz-range-track {
+  position: relative;
+  height: var(--track-size);
+  background: var(--color-gray-300);
+  border-radius: 6px;
+}

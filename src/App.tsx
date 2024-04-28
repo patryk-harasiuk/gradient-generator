@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import { range } from "./utils/range";
 import { ColorPickerButton } from "./components/ColorPickerButton";
+import { PrecisionInput } from "./components/PrecisionInput";
 
 function App() {
   const [colors, setColors] = useState(["#000066", "FFEA00"]);
@@ -34,6 +35,12 @@ function App() {
             );
           })}
         </ul>
+      </div>
+
+      <div className="precision-box">
+        <span>Precision:</span>
+
+        <PrecisionInput />
       </div>
     </div>
   );

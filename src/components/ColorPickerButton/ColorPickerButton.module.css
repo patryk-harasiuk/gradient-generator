@@ -10,13 +10,15 @@
 }
 
 .colorBox {
-  --background: hsl(0deg 100% 50%);
-
+  /* --background: hsl(0deg 100% 50%); */
   position: absolute;
   inset: 3px;
 
   width: calc(100% - 6px);
   height: calc(100% - 6px);
   border-radius: 2px;
-  background: var(--background);
+  background: var(--color-background);
+
+  border: none;
+  /* background: var(--background); */
 }

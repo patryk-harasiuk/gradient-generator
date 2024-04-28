@@ -211,7 +211,6 @@ dialog::backdrop {
   flex-direction: column;
   justify-content: center;
   min-height: 1.625rem;
-  gap: 16px;
 }
 
 .colors-box ul {
@@ -220,6 +219,18 @@ dialog::backdrop {
   gap: 16px;
   list-style-type: none;
   isolation: isolate;
+}
+
+.precision-box {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  min-height: 1.625rem;
+}
+
+.precision-box span {
+  font-weight: var(--font-weight-medium);
+  text-align: left;
 }
 
 .colors-box-item {
@@ -251,6 +262,7 @@ dialog::backdrop {
 
 .colors-box span {
   font-weight: var(--font-weight-medium);
+  text-align: left;
 }
 
 @keyframes fadeIn {
