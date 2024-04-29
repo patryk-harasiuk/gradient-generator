@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -226,6 +230,20 @@ dialog::backdrop {
   width: 100%;
   flex-direction: column;
   min-height: 1.625rem;
+}
+
+.angle-box {
+  display: flex;
+
+  flex: 1 1 0%;
+  min-width: 155px;
+
+  flex-direction: column;
+}
+
+.angle-box span {
+  font-weight: var(--font-weight-medium);
+  text-align: left;
 }
 
 .precision-box span {
