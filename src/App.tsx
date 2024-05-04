@@ -4,6 +4,7 @@ import { range } from "./utils/range";
 import { ColorPickerButton } from "./components/ColorPickerButton";
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
+import { AngleSVG } from "./components/AngleSVG";
 
 function App() {
   const [colors, setColors] = useState(["#000066", "FFEA00"]);
@@ -43,11 +44,9 @@ function App() {
 
       <div className="angle-box">
         <div>
-          <div>
-            <span>Angle:</span>
+          <span>Angle:</span>
 
-            <AnglePicker />
-          </div>
+          <AnglePicker />
         </div>
       </div>
     </div>
