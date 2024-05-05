@@ -19,13 +19,13 @@
   inset: 0px;
 }
 
-.test {
+.svgCoverWrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;
 }
 
-.testSvg {
+.svgCover {
   display: block;
   width: 100%;
   height: 100%;

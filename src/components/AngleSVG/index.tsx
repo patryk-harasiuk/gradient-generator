@@ -10,9 +10,9 @@ export const AngleSVG = () => (
       r="133.6"
       fill="none"
       stroke="var(--color-gray-100)"
-      stroke-width="2"
-      stroke-dasharray="0, 6"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeDasharray="0, 6"
+      strokeLinecap="round"
     ></circle>
 
     <circle
@@ -21,9 +21,9 @@ export const AngleSVG = () => (
       r="100.2"
       fill="none"
       stroke="var(--color-gray-100)"
-      stroke-width="2"
-      stroke-dasharray="0, 6"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeDasharray="0, 6"
+      strokeLinecap="round"
     ></circle>
     <circle
       cx="50%"
@@ -31,9 +31,9 @@ export const AngleSVG = () => (
       r="66.8"
       fill="none"
       stroke="var(--color-gray-100)"
-      stroke-width="2"
-      stroke-dasharray="0, 6"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeDasharray="0, 6"
+      strokeLinecap="round"
     ></circle>
     <circle
       cx="50%"
@@ -41,9 +41,9 @@ export const AngleSVG = () => (
       r="33.4"
       fill="none"
       stroke="var(--color-gray-100)"
-      stroke-width="2"
-      stroke-dasharray="0, 6"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeDasharray="0, 6"
+      strokeLinecap="round"
     ></circle>
   </svg>
 );

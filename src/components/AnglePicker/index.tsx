@@ -17,27 +17,24 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
   const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();
     setIsDragging(true);
-    handleMouseMove(event);
+    handleMouseClick(event);
   };
 
   const handleMouseUp = () => {
-    console.log("handle mouse up");
     setIsDragging(false);
   };
 
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!isDragging) return;
-
+  const handleMouseClick = (event: MouseEvent) => {
     const rect = event.currentTarget.getBoundingClientRect();
 
     const centerX = rect.left + rect.width / 2;
 
-    console.log(centerX, "centerX");
     const centerY = rect.top + rect.height / 2;
-    console.log(centerY, "centerY");
     const clickedX = event.clientX - centerX;
     const clickedY = event.clientY - centerY;
 
+    console.log(centerY, "centerY");
+    console.log(centerX, "centerX");
     console.log(clickedX, "clickedX");
     console.log(clickedY, "clickedY");
 
@@ -50,15 +47,18 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
 
     // Round the angle to the nearest multiple of 5
     newAngle = Math.round(newAngle / 5) * 5;
-    setAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+
+    newAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+
+    setAngle(newAngle);
 
     console.log(newAngle < 0 ? newAngle + 360 : newAngle, "newAngle");
   };
 
-  const handleMouseClick = (event: MouseEvent) => {
-    if (!isDragging) {
-      handleMouseMove(event);
-    }
+  const handleMouseMove = (event: MouseEvent) => {
+    if (!isDragging) return;
+
+    handleMouseClick(event);
   };
 
   return (
@@ -68,24 +68,21 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
           <AngleSVG />
         </div>
 
-        <div className={styles.test}>
-          <svg viewBox="0 0 200 200" className={styles.testSvg}>
+        <div className={styles.svgCoverWrapper}>
+          <svg viewBox="0 0 200 200" className={styles.svgCover}>
             <circle></circle>
           </svg>
         </div>
 
         <div
           className={styles.rotationWrapper}
-          onClick={handleMouseMove}
+          onClick={handleMouseClick}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onMouseDown={handleMouseDown}
           style={{ "--rotation": `${angle}deg` } as CSSProperties}
         >
-          <button
-            className={styles.rotationButton}
-            ref={rotationButtonRef}
-            onMouseDown={handleMouseDown}
-          />
+          <button className={styles.rotationButton} ref={rotationButtonRef} />
         </div>
 
         <div className={styles.dot} />
