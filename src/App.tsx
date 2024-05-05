@@ -1,17 +1,58 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { range } from "./utils/range";
 import { ColorPickerButton } from "./components/ColorPickerButton";
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
-import { AngleSVG } from "./components/AngleSVG";
+
+const DEFAULT_COLORS = [
+  {
+    id: 1,
+    color: "#1f005c",
+  },
+  {
+    id: 2,
+    color: "#ffb56b",
+  },
+  {
+    id: 3,
+    color: "",
+  },
+  {
+    id: 4,
+    color: "",
+  },
+  {
+    id: 5,
+    color: "",
+  },
+];
 
 function App() {
-  const [colors, setColors] = useState(["#000066", "FFEA00"]);
+  const [colors, setColors] = useState(DEFAULT_COLORS);
   const [angle, setAngle] = useState(0);
 
-  const colorStops = colors.join(", ");
-  const backgroundImage = `linear-gradient(${colorStops})`;
+  const colorStops = colors.flatMap((colorObj) =>
+    colorObj.color ? [colorObj.color] : []
+  );
+
+  const backgroundImage = `linear-gradient(${angle}deg,${colorStops})`;
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--gradient", backgroundImage);
+  }, [backgroundImage]);
+
+  const handleColorChange = (id: number) => (color: string) => {
+    const updatedColors = colors.map((colorObj) => {
+      if (colorObj.id === id) {
+        return { ...colorObj, color };
+      } else {
+        return colorObj;
+      }
+    });
+
+    setColors(updatedColors);
+  };
 
   return (
     <div className="wrapper">
@@ -28,10 +69,13 @@ function App() {
         <span>Colors:</span>
 
         <ul>
-          {range(1, 5).map((_, index) => {
+          {colors.map((colorObj) => {
             return (
-              <li key={index}>
-                <ColorPickerButton />
+              <li key={colorObj.id}>
+                <ColorPickerButton
+                  setColor={handleColorChange(colorObj.id)}
+                  value={colorObj.color}
+                />
               </li>
             );
           })}
