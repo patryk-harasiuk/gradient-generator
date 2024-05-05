@@ -8,6 +8,7 @@ import { AngleSVG } from "./components/AngleSVG";
 
 function App() {
   const [colors, setColors] = useState(["#000066", "FFEA00"]);
+  const [angle, setAngle] = useState(0);
 
   const colorStops = colors.join(", ");
   const backgroundImage = `linear-gradient(${colorStops})`;
@@ -46,7 +47,7 @@ function App() {
         <div>
           <span>Angle:</span>
 
-          <AnglePicker />
+          <AnglePicker angle={angle} setAngle={setAngle} />
         </div>
       </div>
     </div>
