@@ -1,6 +1,6 @@
 import "./App.css";
+import chroma from "chroma-js";
 import { useEffect, useState } from "react";
-import { range } from "./utils/range";
 import { ColorPickerButton } from "./components/ColorPickerButton";
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
@@ -14,31 +14,43 @@ const DEFAULT_COLORS = [
     id: 2,
     color: "#ffb56b",
   },
-  {
-    id: 3,
-    color: "",
-  },
-  {
-    id: 4,
-    color: "",
-  },
-  {
-    id: 5,
-    color: "",
-  },
+  // {
+  //   id: 3,
+  //   color: "",
+  // },
+  // {
+  //   id: 4,
+  //   color: "",
+  // },
+  // {
+  //   id: 5,
+  //   color: "",
+  // },
 ];
 
 function App() {
   const [colors, setColors] = useState(DEFAULT_COLORS);
+  const [precision, setPrecision] = useState(1);
   const [angle, setAngle] = useState(0);
 
-  const colorStops = colors.flatMap((colorObj) =>
+  // chroma.scale(['white', 'black']).colors(12);
+
+  const parsedColors = colors.flatMap((colorObj) =>
     colorObj.color ? [colorObj.color] : []
   );
 
-  const backgroundImage = `linear-gradient(${angle}deg,${colorStops})`;
+  const colorsWithMidpoints = chroma
+    .scale(parsedColors)
+    .mode("lch")
+    .colors(precision + colors.length)
+    .map((color) => chroma(color).css());
+
+  console.log(colorsWithMidpoints, "with midpoints");
+
+  const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
 
   useEffect(() => {
+    console.log("dsad");
     document.documentElement.style.setProperty("--gradient", backgroundImage);
   }, [backgroundImage]);
 
@@ -82,9 +94,12 @@ function App() {
         </ul>
       </div>
       <div className="precision-box">
-        <span>Precision:</span>
+        <div className="precision-box-information">
+          <span>Precision:</span>
+          <span>{precision}</span>
+        </div>
 
-        <PrecisionInput />
+        <PrecisionInput value={precision} setPrecision={setPrecision} />
       </div>
 
       <div className="angle-box">

@@ -227,6 +227,13 @@ dialog::backdrop {
   min-height: 1.625rem;
 }
 
+.precision-box-information {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .angle-box {
   display: flex;
 

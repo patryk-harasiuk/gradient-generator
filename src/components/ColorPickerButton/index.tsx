@@ -1,20 +1,24 @@
 import styles from "./ColorPickerButton.module.css";
+// import { PlusSVG } from "./PlusSVG";
 
 type Props = {
   setColor: (value: string) => void;
   value: string;
 };
 
-export const ColorPickerButton = ({ setColor, value }: Props) => (
-  <button className={styles.button} type="button">
-    <input
-      className={styles.colorBox}
-      type="color"
-      value={value}
-      onChange={(e) => {
-        console.log(e.target.value, "value");
-        setColor(e.target.value);
-      }}
-    />
-  </button>
-);
+// const DEFAULT_COLOR_PICK = "#ff0000";
+
+export const ColorPickerButton = ({ setColor, value }: Props) => {
+  return (
+    <div className={styles.colorBoxWrapper}>
+      <input
+        className={styles.colorBox}
+        type="color"
+        value={value}
+        onChange={(e) => {
+          setColor(e.target.value);
+        }}
+      />
+    </div>
+  );
+};

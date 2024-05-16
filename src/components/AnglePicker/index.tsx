@@ -1,18 +1,25 @@
-import { CSSProperties, Dispatch, MouseEvent, useRef, useState } from "react";
+import {
+  CSSProperties,
+  Dispatch,
+  SetStateAction,
+  MouseEvent,
+  useRef,
+  useState,
+} from "react";
 
 import styles from "./AnglePicker.module.css";
 
 import { AngleSVG } from "../AngleSVG";
 
 type Props = {
-  setAngle: Dispatch<React.SetStateAction<number>>;
+  setAngle: Dispatch<SetStateAction<number>>;
   angle: number;
 };
 
 export const AnglePicker = ({ setAngle, angle }: Props) => {
-  const rotationButtonRef = useRef<HTMLButtonElement | null>(null);
-
   const [isDragging, setIsDragging] = useState(false);
+
+  const rotationButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleMouseDown = (event: MouseEvent) => {
     event.preventDefault();

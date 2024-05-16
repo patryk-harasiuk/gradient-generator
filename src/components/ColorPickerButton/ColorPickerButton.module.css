@@ -1,4 +1,4 @@
-.button {
+.colorBoxWrapper {
   display: block;
   cursor: pointer;
   position: relative;
@@ -10,7 +10,6 @@
 }
 
 .colorBox {
-  /* --background: hsl(0deg 100% 50%); */
   position: absolute;
   inset: 3px;
 
@@ -20,5 +19,25 @@
   background: var(--color-background);
 
   border: none;
-  /* background: var(--background); */
+}
+
+.inactiveButton {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1/1;
+  min-height: 60px;
+  border-radius: 6px;
+
+  border: 3px solid var(--color-gray-100);
+  background: var(--color-background);
+}
+
+.iconWrapper {
+  position: absolute;
+  inset: 0px;
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  color: white;
 }
