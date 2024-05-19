@@ -50,7 +50,6 @@ function App() {
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
 
   useEffect(() => {
-    console.log("dsad");
     document.documentElement.style.setProperty("--gradient", backgroundImage);
   }, [backgroundImage]);
 
