@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
 type Props = {
   viewBoxWidth: number;
@@ -18,7 +18,7 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
   });
   const [endPoint, setEndPoint] = useState<Coordinates>({ x: 10, y: 190 });
 
-  const svgRef = useRef<SVGElement | null>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
 
   const [draggingPointId, setDraggingPointId] = useState<string | null>(null);
 
@@ -26,13 +26,11 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
   const isControlPoint = draggingPointId === "controlPoint";
   const isEndPoint = draggingPointId === "endPoint";
 
-  // handleMouseDown(pointId) {
-  //     this.setState({ draggingPointId: pointId });
-  //   }
-
-  //   handleMouseUp() {
-  //     this.setState({ draggingPointId: null });
-  //   }
+  const instructions = `
+      M ${startPoint.x},${startPoint.y}
+      Q ${controlPoint.x},${controlPoint.y}
+        ${endPoint.x},${endPoint.y}
+    `;
 
   const handleMouseDown = (pointId: string) => {
     setDraggingPointId(pointId);
@@ -42,13 +40,7 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
     setDraggingPointId(null);
   };
 
-  const handleMouseMove = ({
-    clientX,
-    clientY,
-  }: {
-    clientX: number;
-    clientY: number;
-  }) => {
+  const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
     if (!draggingPointId || !svgRef.current) {
       return;
     }
@@ -67,4 +59,32 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
 
     if (isEndPoint) setEndPoint({ x: viewBoxX, y: viewBoxY });
   };
+
+  return (
+    <svg
+      ref={svgRef}
+      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      style={{ width: "100%", overflow: "visible" }}
+    ></svg>
+  );
 };
+
+type ConnectingLineProps = {
+  from: Coordinates;
+  to: Coordinates;
+};
+
+const ConnectingLine = ({ from, to }: ConnectingLineProps) => (
+  <line
+    x1={from.x}
+    y1={from.y}
+    x2={to.x}
+    y2={from.y}
+    stroke="rgb(200, 200, 200)"
+    strokeDasharray="5,5"
+    strokeWidth={2}
+  />
+);
