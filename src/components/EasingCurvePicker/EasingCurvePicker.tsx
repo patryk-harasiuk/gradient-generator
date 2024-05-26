@@ -10,27 +10,35 @@ type Coordinates = {
   y: number;
 };
 
-const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
-  const [startPoint, setStartPoint] = useState<Coordinates>({ x: 10, y: 10 });
-  const [controlPoint, setControlPoint] = useState<Coordinates>({
-    x: 190,
-    y: 100,
+export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
+  const [startPoint, setStartPoint] = useState<Coordinates>({ x: 0, y: 232 });
+  const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>({
+    x: 58,
+    y: 174,
   });
-  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 10, y: 190 });
+
+  const [secondControlPoint, setSecondControlPoint] = useState<Coordinates>({
+    x: 174,
+    y: 58,
+  });
+
+  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 232, y: 0 });
 
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   const [draggingPointId, setDraggingPointId] = useState<string | null>(null);
 
-  const isStartPoint = draggingPointId === "startPoint";
-  const isControlPoint = draggingPointId === "controlPoint";
+  const isStartPoint = draggingPointId === "firstStartPoint";
+  const isFirstControlPoint = draggingPointId === "firstControlPoint";
+  const isSecondControlPoint = draggingPointId === "secondControlPoint";
   const isEndPoint = draggingPointId === "endPoint";
 
   const instructions = `
-      M ${startPoint.x},${startPoint.y}
-      Q ${controlPoint.x},${controlPoint.y}
-        ${endPoint.x},${endPoint.y}
-    `;
+    M ${startPoint.x},${startPoint.y}
+    C ${firstControlPoint.x},${firstControlPoint.y}
+      ${secondControlPoint.x},${secondControlPoint.y}
+      ${endPoint.x},${endPoint.y}
+  `;
 
   const handleMouseDown = (pointId: string) => {
     setDraggingPointId(pointId);
@@ -55,7 +63,10 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
 
     if (isStartPoint) setStartPoint({ x: viewBoxX, y: viewBoxY });
 
-    if (isControlPoint) setControlPoint({ x: viewBoxX, y: viewBoxY });
+    if (isFirstControlPoint) setFirstControlPoint({ x: viewBoxX, y: viewBoxY });
+
+    if (isSecondControlPoint)
+      setSecondControlPoint({ x: viewBoxX, y: viewBoxY });
 
     if (isEndPoint) setEndPoint({ x: viewBoxX, y: viewBoxY });
   };
@@ -67,8 +78,30 @@ const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      style={{ width: "100%", overflow: "visible" }}
-    ></svg>
+      style={{
+        width: "100%",
+        overflow: "visible",
+        border: "3px solid var(--color-gray-300)",
+        borderRadius: "6px",
+        display: "block",
+      }}
+    >
+      <ConnectingLine from={startPoint} to={firstControlPoint} />
+
+      <ConnectingLine from={secondControlPoint} to={endPoint} />
+
+      <Curve instructions={instructions} />
+
+      <Handle
+        coordinates={firstControlPoint}
+        onMouseDown={() => handleMouseDown("firstControlPoint")}
+      />
+
+      <Handle
+        coordinates={secondControlPoint}
+        onMouseDown={() => handleMouseDown("secondControlPoint")}
+      />
+    </svg>
   );
 };
 
@@ -82,9 +115,41 @@ const ConnectingLine = ({ from, to }: ConnectingLineProps) => (
     x1={from.x}
     y1={from.y}
     x2={to.x}
-    y2={from.y}
+    y2={to.y}
     stroke="rgb(200, 200, 200)"
     strokeDasharray="5,5"
     strokeWidth={2}
+  />
+);
+
+type CurveProps = {
+  instructions: string;
+};
+
+const Curve = ({ instructions }: CurveProps) => (
+  <path
+    d={instructions}
+    fill="none"
+    stroke="rgb(213, 0, 249)"
+    strokeWidth={5}
+  />
+);
+
+type HandleProps = {
+  coordinates: Coordinates;
+  onMouseDown: VoidFunction;
+};
+
+const Handle = ({ coordinates, onMouseDown }: HandleProps) => (
+  <ellipse
+    cx={coordinates.x}
+    cy={coordinates.y}
+    rx={8}
+    ry={8}
+    fill="rgb(255, 255, 255)"
+    stroke="rgb(244, 0, 137)"
+    strokeWidth={2}
+    onMouseDown={onMouseDown}
+    style={{ cursor: "-webkit-grab" }}
   />
 );

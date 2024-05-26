@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ColorPickerButton } from "./components/ColorPickerButton";
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
+import { Bezier } from "./components/EasingCurvePicker/EasingCurvePicker";
 
 const DEFAULT_COLORS = [
   {
@@ -106,6 +107,14 @@ function App() {
           <span>Angle:</span>
 
           <AnglePicker angle={angle} setAngle={setAngle} />
+        </div>
+      </div>
+
+      <div className="easing-curve-box">
+        <div>
+          <span>Easing Curve:</span>
+
+          <Bezier viewBoxWidth={250} viewBoxHeight={250} />
         </div>
       </div>
     </div>
