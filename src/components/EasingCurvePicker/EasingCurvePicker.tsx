@@ -1,4 +1,5 @@
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import styles from "./EasingCurvePicker.module.css";
 
 type Props = {
   viewBoxWidth: number;
@@ -21,32 +22,6 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
     x: 174,
     y: 58,
   });
-
-  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 232, y: 0 });
-
-  const svgRef = useRef<SVGSVGElement | null>(null);
-
-  const [draggingPointId, setDraggingPointId] = useState<string | null>(null);
-
-  const isStartPoint = draggingPointId === "firstStartPoint";
-  const isFirstControlPoint = draggingPointId === "firstControlPoint";
-  const isSecondControlPoint = draggingPointId === "secondControlPoint";
-  const isEndPoint = draggingPointId === "endPoint";
-
-  const instructions = `
-    M ${startPoint.x},${startPoint.y}
-    C ${firstControlPoint.x},${firstControlPoint.y}
-      ${secondControlPoint.x},${secondControlPoint.y}
-      ${endPoint.x},${endPoint.y}
-  `;
-
-  const handleMouseDown = (pointId: string) => {
-    setDraggingPointId(pointId);
-  };
-
-  const handleMouseUp = () => {
-    setDraggingPointId(null);
-  };
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
     if (!draggingPointId || !svgRef.current) {
@@ -71,37 +46,67 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
     if (isEndPoint) setEndPoint({ x: viewBoxX, y: viewBoxY });
   };
 
+  const handleMouseDown = (pointId: string) => {
+    setDraggingPointId(pointId);
+  };
+
+  const handleMouseUp = () => {
+    setDraggingPointId(null);
+  };
+
+  useEffect(() => {
+    // document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      //   document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 232, y: 0 });
+
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+  const [draggingPointId, setDraggingPointId] = useState<string | null>(null);
+
+  const isStartPoint = draggingPointId === "firstStartPoint";
+  const isFirstControlPoint = draggingPointId === "firstControlPoint";
+  const isSecondControlPoint = draggingPointId === "secondControlPoint";
+  const isEndPoint = draggingPointId === "endPoint";
+
+  const instructions = `
+    M ${startPoint.x},${startPoint.y}
+    C ${firstControlPoint.x},${firstControlPoint.y}
+      ${secondControlPoint.x},${secondControlPoint.y}
+      ${endPoint.x},${endPoint.y}
+  `;
+
   return (
-    <svg
-      ref={svgRef}
-      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      style={{
-        width: "100%",
-        overflow: "visible",
-        border: "3px solid var(--color-gray-300)",
-        borderRadius: "6px",
-        display: "block",
-      }}
-    >
-      <ConnectingLine from={startPoint} to={firstControlPoint} />
+    <div className={styles.wrapper}>
+      <svg
+        className={styles.svg}
+        ref={svgRef}
+        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        <ConnectingLine from={startPoint} to={firstControlPoint} />
 
-      <ConnectingLine from={secondControlPoint} to={endPoint} />
+        <ConnectingLine from={secondControlPoint} to={endPoint} />
 
-      <Curve instructions={instructions} />
+        <Curve instructions={instructions} />
+        <Handle
+          coordinates={firstControlPoint}
+          onMouseDown={() => handleMouseDown("firstControlPoint")}
+        />
 
-      <Handle
-        coordinates={firstControlPoint}
-        onMouseDown={() => handleMouseDown("firstControlPoint")}
-      />
-
-      <Handle
-        coordinates={secondControlPoint}
-        onMouseDown={() => handleMouseDown("secondControlPoint")}
-      />
-    </svg>
+        <Handle
+          coordinates={secondControlPoint}
+          onMouseDown={() => handleMouseDown("secondControlPoint")}
+        />
+      </svg>
+    </div>
   );
 };
 
@@ -116,7 +121,7 @@ const ConnectingLine = ({ from, to }: ConnectingLineProps) => (
     y1={from.y}
     x2={to.x}
     y2={to.y}
-    stroke="rgb(200, 200, 200)"
+    stroke="var(--color-gray-700)"
     strokeDasharray="5,5"
     strokeWidth={2}
   />
@@ -127,12 +132,7 @@ type CurveProps = {
 };
 
 const Curve = ({ instructions }: CurveProps) => (
-  <path
-    d={instructions}
-    fill="none"
-    stroke="rgb(213, 0, 249)"
-    strokeWidth={5}
-  />
+  <path d={instructions} fill="none" stroke="white" strokeWidth={5} />
 );
 
 type HandleProps = {
@@ -140,16 +140,16 @@ type HandleProps = {
   onMouseDown: VoidFunction;
 };
 
-const Handle = ({ coordinates, onMouseDown }: HandleProps) => (
+const Handle = ({ coordinates: { x, y }, onMouseDown }: HandleProps) => (
   <ellipse
-    cx={coordinates.x}
-    cy={coordinates.y}
+    cx={x}
+    cy={y}
     rx={8}
     ry={8}
     fill="rgb(255, 255, 255)"
-    stroke="rgb(244, 0, 137)"
+    stroke="black"
     strokeWidth={2}
     onMouseDown={onMouseDown}
-    style={{ cursor: "-webkit-grab" }}
+    style={{ cursor: "-webkit-grab", transform: "translate(-50%, -50%);" }}
   />
 );

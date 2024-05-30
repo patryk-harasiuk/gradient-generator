@@ -111,10 +111,12 @@ function App() {
       </div>
 
       <div className="easing-curve-box">
-        <div>
+        <div style={{ width: "250px" }}>
           <span>Easing Curve:</span>
 
+          {/* <div style={{width: '260px', height:'260px', display:'flex', justifyContent:'center', alignItems:'center', position:}}> */}
           <Bezier viewBoxWidth={250} viewBoxHeight={250} />
+          {/* </div> */}
         </div>
       </div>
     </div>
