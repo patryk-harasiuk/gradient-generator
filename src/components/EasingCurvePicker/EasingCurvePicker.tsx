@@ -30,20 +30,28 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
 
     const svgRect = svgRef.current.getBoundingClientRect();
 
-    const svgX = clientX - svgRect.left;
-    const svgY = clientY - svgRect.top;
+    if (
+      clientX >= svgRect.left &&
+      clientX <= svgRect.right &&
+      clientY >= svgRect.top &&
+      clientY <= svgRect.bottom
+    ) {
+      const svgX = clientX - svgRect.left;
+      const svgY = clientY - svgRect.top;
 
-    const viewBoxX = (svgX * viewBoxWidth) / svgRect.width;
-    const viewBoxY = (svgY * viewBoxHeight) / svgRect.height;
+      const viewBoxX = (svgX * viewBoxWidth) / svgRect.width;
+      const viewBoxY = (svgY * viewBoxHeight) / svgRect.height;
 
-    if (isStartPoint) setStartPoint({ x: viewBoxX, y: viewBoxY });
+      if (isStartPoint) setStartPoint({ x: viewBoxX, y: viewBoxY });
 
-    if (isFirstControlPoint) setFirstControlPoint({ x: viewBoxX, y: viewBoxY });
+      if (isFirstControlPoint)
+        setFirstControlPoint({ x: viewBoxX, y: viewBoxY });
 
-    if (isSecondControlPoint)
-      setSecondControlPoint({ x: viewBoxX, y: viewBoxY });
+      if (isSecondControlPoint)
+        setSecondControlPoint({ x: viewBoxX, y: viewBoxY });
 
-    if (isEndPoint) setEndPoint({ x: viewBoxX, y: viewBoxY });
+      if (isEndPoint) setEndPoint({ x: viewBoxX, y: viewBoxY });
+    }
   };
 
   const handleMouseDown = (pointId: string) => {
@@ -55,11 +63,9 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
   };
 
   useEffect(() => {
-    // document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
-      //   document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
@@ -84,28 +90,30 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <svg
-        className={styles.svg}
-        ref={svgRef}
-        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        <ConnectingLine from={startPoint} to={firstControlPoint} />
+      <div className={styles.svgWrapper}>
+        <svg
+          className={styles.svg}
+          ref={svgRef}
+          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        >
+          <ConnectingLine from={startPoint} to={firstControlPoint} />
 
-        <ConnectingLine from={secondControlPoint} to={endPoint} />
+          <ConnectingLine from={secondControlPoint} to={endPoint} />
 
-        <Curve instructions={instructions} />
-        <Handle
-          coordinates={firstControlPoint}
-          onMouseDown={() => handleMouseDown("firstControlPoint")}
-        />
+          <Curve instructions={instructions} />
+          <Handle
+            coordinates={firstControlPoint}
+            onMouseDown={() => handleMouseDown("firstControlPoint")}
+          />
 
-        <Handle
-          coordinates={secondControlPoint}
-          onMouseDown={() => handleMouseDown("secondControlPoint")}
-        />
-      </svg>
+          <Handle
+            coordinates={secondControlPoint}
+            onMouseDown={() => handleMouseDown("secondControlPoint")}
+          />
+        </svg>
+      </div>
     </div>
   );
 };
@@ -132,7 +140,13 @@ type CurveProps = {
 };
 
 const Curve = ({ instructions }: CurveProps) => (
-  <path d={instructions} fill="none" stroke="white" strokeWidth={5} />
+  <path
+    d={instructions}
+    fill="none"
+    stroke="white"
+    strokeWidth={5}
+    strokeLinecap="round"
+  />
 );
 
 type HandleProps = {
