@@ -11,16 +11,18 @@ type Coordinates = {
   y: number;
 };
 
+// 232
+
 export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
-  const [startPoint, setStartPoint] = useState<Coordinates>({ x: 0, y: 232 });
+  const [startPoint, setStartPoint] = useState<Coordinates>({ x: 0, y: 230 });
   const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>({
-    x: 58,
-    y: 174,
+    x: 57,
+    y: 172,
   });
 
   const [secondControlPoint, setSecondControlPoint] = useState<Coordinates>({
-    x: 174,
-    y: 58,
+    x: 172,
+    y: 57,
   });
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -70,7 +72,7 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
     };
   }, []);
 
-  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 232, y: 0 });
+  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 230, y: 0 });
 
   const svgRef = useRef<SVGSVGElement | null>(null);
 
@@ -146,6 +148,7 @@ const Curve = ({ instructions }: CurveProps) => (
     stroke="white"
     strokeWidth={5}
     strokeLinecap="round"
+    style={{ inset: "8px", position: "absolute" }}
   />
 );
 

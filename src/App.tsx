@@ -114,7 +114,7 @@ function App() {
         <div style={{ width: "250px" }}>
           <span>Easing Curve:</span>
 
-          <Bezier viewBoxWidth={250} viewBoxHeight={250} />
+          <Bezier viewBoxWidth={230} viewBoxHeight={230} />
         </div>
       </div>
     </div>

@@ -36,9 +36,9 @@
 }
 
 .svgWrapper {
-  --inset-by: 7px;
-
   position: absolute;
+  --inset-by: 8px;
+
   top: calc(var(--inset-by));
   left: calc(var(--inset-by));
   right: calc(var(--inset-by));
