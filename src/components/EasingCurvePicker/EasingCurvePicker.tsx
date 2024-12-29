@@ -11,8 +11,6 @@ type Coordinates = {
   y: number;
 };
 
-// 232
-
 export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
   const [startPoint, setStartPoint] = useState<Coordinates>({ x: 0, y: 230 });
   const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>({
@@ -92,29 +90,33 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.svgWrapper}>
-        <svg
-          className={styles.svg}
-          ref={svgRef}
-          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-          <ConnectingLine from={startPoint} to={firstControlPoint} />
+      <span className={styles.info}>Easing Curve:</span>
 
-          <ConnectingLine from={secondControlPoint} to={endPoint} />
+      <div className={styles.boxWrapper}>
+        <div className={styles.svgWrapper}>
+          <svg
+            className={styles.svg}
+            ref={svgRef}
+            viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+            <ConnectingLine from={startPoint} to={firstControlPoint} />
 
-          <Curve instructions={instructions} />
-          <Handle
-            coordinates={firstControlPoint}
-            onMouseDown={() => handleMouseDown("firstControlPoint")}
-          />
+            <ConnectingLine from={secondControlPoint} to={endPoint} />
 
-          <Handle
-            coordinates={secondControlPoint}
-            onMouseDown={() => handleMouseDown("secondControlPoint")}
-          />
-        </svg>
+            <Curve instructions={instructions} />
+            <Handle
+              coordinates={firstControlPoint}
+              onMouseDown={() => handleMouseDown("firstControlPoint")}
+            />
+
+            <Handle
+              coordinates={secondControlPoint}
+              onMouseDown={() => handleMouseDown("secondControlPoint")}
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );

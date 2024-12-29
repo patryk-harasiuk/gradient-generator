@@ -281,10 +281,6 @@ dialog::backdrop {
   text-align: left;
 }
 
-.easing-curve-box {
-  position: relative;
-  /* overflow: visible; */
-}
 
 @keyframes fadeIn {
   0% {

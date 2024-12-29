@@ -104,13 +104,7 @@ function App() {
 
       <AnglePicker angle={angle} setAngle={setAngle} />
 
-      <div className="easing-curve-box">
-        <div style={{ width: "250px" }}>
-          <span>Easing Curve:</span>
-
-          <Bezier viewBoxWidth={230} viewBoxHeight={230} />
-        </div>
-      </div>
+      <Bezier viewBoxWidth={230} viewBoxHeight={230} />
     </div>
   );
 }
