@@ -216,39 +216,6 @@ dialog::backdrop {
   isolation: isolate;
 }
 
-.precision-box {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  min-height: 1.625rem;
-}
-
-.precision-box-information {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.angle-box {
-  display: flex;
-
-  flex: 1 1 0;
-  min-width: 155px;
-
-  flex-direction: column;
-}
-
-.angle-box span {
-  font-weight: var(--font-weight-medium);
-  text-align: left;
-}
-
-.precision-box span {
-  font-weight: var(--font-weight-medium);
-  text-align: left;
-}
-
 .colors-box-item {
   position: relative;
   flex-grow: 1;

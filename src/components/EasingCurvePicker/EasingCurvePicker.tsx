@@ -11,17 +11,23 @@ type Coordinates = {
   y: number;
 };
 
-export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
-  const [startPoint, setStartPoint] = useState<Coordinates>({ x: 0, y: 230 });
-  const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>({
-    x: 57,
-    y: 172,
-  });
+const DEFAULT_START_POINT: Coordinates = { x: 0, y: 230 };
+const DEFAULT_FIRST_CONTROL_POINT: Coordinates = { x: 57, y: 172 };
+const DEFAULT_SECOND_CONTROL_POINT: Coordinates = { x: 172, y: 57 };
+const DEFAULT_END_POINT: Coordinates = { x: 230, y: 0 };
 
-  const [secondControlPoint, setSecondControlPoint] = useState<Coordinates>({
-    x: 172,
-    y: 57,
-  });
+export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
+  const [startPoint, setStartPoint] =
+    useState<Coordinates>(DEFAULT_START_POINT);
+  const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>(
+    DEFAULT_FIRST_CONTROL_POINT,
+  );
+
+  const [secondControlPoint, setSecondControlPoint] = useState<Coordinates>(
+    DEFAULT_SECOND_CONTROL_POINT,
+  );
+
+  const [endPoint, setEndPoint] = useState<Coordinates>(DEFAULT_END_POINT);
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
     if (!draggingPointId || !svgRef.current) {
@@ -69,8 +75,6 @@ export const Bezier = ({ viewBoxHeight, viewBoxWidth }: Props) => {
       document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
-
-  const [endPoint, setEndPoint] = useState<Coordinates>({ x: 230, y: 0 });
 
   const svgRef = useRef<SVGSVGElement | null>(null);
 

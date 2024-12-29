@@ -12,15 +12,21 @@ export const PrecisionInput = ({ setPrecision, value }: Props) => {
   };
 
   return (
-    <div className={styles.inputWrapper}>
-      <input
-        className={styles.input}
-        value={value}
-        onChange={handlePrecisionChange}
-        type="range"
-        min="1"
-        max="20"
-      />
+    <div className={styles.wrapper}>
+      <div className={styles.infoBox}>
+        <span className={styles.precision}>Precision:</span>
+        <span>{value}</span>
+      </div>
+      <div className={styles.inputWrapper}>
+        <input
+          className={styles.input}
+          value={value}
+          onChange={handlePrecisionChange}
+          type="range"
+          min="1"
+          max="20"
+        />
+      </div>
     </div>
   );
 };

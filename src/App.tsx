@@ -93,14 +93,8 @@ function App() {
           })}
         </ul>
       </div>
-      <div className="precision-box">
-        <div className="precision-box-information">
-          <span>Precision:</span>
-          <span>{precision}</span>
-        </div>
 
-        <PrecisionInput value={precision} setPrecision={setPrecision} />
-      </div>
+      <PrecisionInput value={precision} setPrecision={setPrecision} />
 
       <AnglePicker angle={angle} setAngle={setAngle} />
 
