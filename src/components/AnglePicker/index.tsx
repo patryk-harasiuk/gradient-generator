@@ -21,31 +21,26 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
 
   const rotationButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleMouseDown = (event: MouseEvent) => {
+  const handleMouseDown = (event: MouseEvent): void => {
     event.preventDefault();
     setIsDragging(true);
     handleMouseClick(event);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (): void => {
     setIsDragging(false);
   };
 
-  const handleMouseClick = (event: MouseEvent) => {
-    const rect = event.currentTarget.getBoundingClientRect();
+  const handleMouseClick = (event: MouseEvent): void => {
+    const rect: DOMRect = event.currentTarget.getBoundingClientRect();
 
-    const centerX = rect.left + rect.width / 2;
+    const centerX: number = rect.left + rect.width / 2;
 
-    const centerY = rect.top + rect.height / 2;
-    const clickedX = event.clientX - centerX;
-    const clickedY = event.clientY - centerY;
+    const centerY: number = rect.top + rect.height / 2;
+    const clickedX: number = event.clientX - centerX;
+    const clickedY: number = event.clientY - centerY;
 
-    console.log(centerY, "centerY");
-    console.log(centerX, "centerX");
-    console.log(clickedX, "clickedX");
-    console.log(clickedY, "clickedY");
-
-    let newAngle = (Math.atan2(clickedY, clickedX) * 180) / Math.PI;
+    let newAngle: number = (Math.atan2(clickedY, clickedX) * 180) / Math.PI;
 
     newAngle += 90;
 
@@ -58,11 +53,9 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
     newAngle = newAngle < 0 ? newAngle + 360 : newAngle;
 
     setAngle(newAngle);
-
-    console.log(newAngle < 0 ? newAngle + 360 : newAngle, "newAngle");
   };
 
-  const handleMouseMove = (event: MouseEvent) => {
+  const handleMouseMove = (event: MouseEvent): void => {
     if (!isDragging) return;
 
     handleMouseClick(event);
@@ -70,7 +63,13 @@ export const AnglePicker = ({ setAngle, angle }: Props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.innerWrapper}>
+      <div className={styles.infoWrapper}>
+        <span className={styles.angle}>Angle:</span>
+
+        <span className={styles.angleValue}>{angle}deg</span>
+      </div>
+
+      <div className={styles.wheelWrapper}>
         <div className={styles.svgWrapper}>
           <AngleSVG />
         </div>

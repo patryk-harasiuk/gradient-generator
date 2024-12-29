@@ -37,7 +37,7 @@ function App() {
   // chroma.scale(['white', 'black']).colors(12);
 
   const parsedColors = colors.flatMap((colorObj) =>
-    colorObj.color ? [colorObj.color] : []
+    colorObj.color ? [colorObj.color] : [],
   );
 
   const colorsWithMidpoints = chroma
@@ -102,13 +102,7 @@ function App() {
         <PrecisionInput value={precision} setPrecision={setPrecision} />
       </div>
 
-      <div className="angle-box">
-        <div>
-          <span>Angle:</span>
-
-          <AnglePicker angle={angle} setAngle={setAngle} />
-        </div>
-      </div>
+      <AnglePicker angle={angle} setAngle={setAngle} />
 
       <div className="easing-curve-box">
         <div style={{ width: "250px" }}>

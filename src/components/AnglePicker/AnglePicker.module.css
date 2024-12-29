@@ -1,22 +1,41 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  align-items: center;
+}
 
+.infoWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.angle {
+  font-weight: var(--font-weight-bold);
+}
+
+.angleValue {
+  color: var(--color-gray-900);
+}
+
+.wheelWrapper {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   -webkit-box-pack: center;
   min-height: 1.625rem;
-}
 
-.innerWrapper {
   position: relative;
   touch-action: none;
   overflow: hidden;
 }
 
+
 .svgWrapper {
   position: absolute;
-  inset: 0px;
+  inset: 0;
 }
 
 .svgCoverWrapper {
@@ -35,34 +54,32 @@
   --rotation: 0deg;
 
   position: absolute;
-  inset: 0px;
+  inset: 0;
   transform: rotate(var(--rotation));
   transform-origin: center center;
 }
 
 .rotationButton {
   display: block;
-  margin: 0px;
-  padding: 0px;
+  padding: 0;
   border: none;
   cursor: pointer;
   text-align: left;
 
   position: absolute;
   top: 5%;
-  left: 0%;
-  right: 0%;
+  left: 0;
+  right: 0;
   width: 5px;
   height: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   background: white;
   border-radius: 9999px;
 }
 
 .dot {
   position: absolute;
-  inset: 0px;
+  inset: 0;
   width: 24px;
   height: 24px;
   margin: auto;
