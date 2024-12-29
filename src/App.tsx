@@ -85,7 +85,7 @@ function App() {
             return (
               <li key={colorObj.id}>
                 <ColorPickerButton
-                  setColor={handleColorChange(colorObj.id)}
+                  setColor={() => handleColorChange(colorObj.id)}
                   value={colorObj.color}
                 />
               </li>

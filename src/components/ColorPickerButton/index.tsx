@@ -1,5 +1,4 @@
 import styles from "./ColorPickerButton.module.css";
-// import { PlusSVG } from "./PlusSVG";
 
 type Props = {
   setColor: (value: string) => void;
