@@ -6,6 +6,7 @@ import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
 import { Bezier } from "./components/EasingCurvePicker/EasingCurvePicker";
 import { GradientBackground } from "./components/GradientBackground/GradientBackground.tsx";
+import { Header } from "./components/Header/Header.tsx";
 
 const DEFAULT_COLORS = [
   {
@@ -36,7 +37,7 @@ function App() {
   const [angle, setAngle] = useState(0);
 
   const parsedColors = colors.flatMap((colorObj) =>
-    colorObj.color ? [colorObj.color] : [],
+    colorObj.color ? [colorObj.color] : []
   );
 
   const colorsWithMidpoints = chroma
@@ -67,10 +68,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <div className="heading-wrapper">
-        <h1 className="gradient-heading">Gradient Generator</h1>
-        <p className="paragraph">Beautiful, luscious gradients ✨</p>
-      </div>
+      <Header />
       <GradientBackground />
       <div className="colors-box">
         <span>Colors:</span>
@@ -93,7 +91,11 @@ function App() {
 
       <AnglePicker angle={angle} setAngle={setAngle} />
 
-      <Bezier viewBoxWidth={230} viewBoxHeight={230} />
+      <Bezier
+        viewBoxWidth={230}
+        viewBoxHeight={230}
+        precision={precision + colors.length}
+      />
     </div>
   );
 }
