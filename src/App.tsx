@@ -1,12 +1,23 @@
 import "./App.css";
 import chroma from "chroma-js";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ColorPickerButton } from "./components/ColorPickerButton";
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
 import { Bezier } from "./components/EasingCurvePicker/EasingCurvePicker";
 import { GradientBackground } from "./components/GradientBackground/GradientBackground.tsx";
 import { Header } from "./components/Header/Header.tsx";
+import type { Coordinates } from "./types.ts";
+import { generateGradientStops } from "./utils/generateGradientStops.ts";
+
+type Bezier = {
+  startPoint: Coordinates;
+  firstControlPoint: Coordinates;
+  secondControlPoint: Coordinates;
+  endPoint: Coordinates;
+  draggingPointId: string | null;
+};
+const VIEWBOX_SIZE = 228;
 
 const DEFAULT_COLORS = [
   {
@@ -31,20 +42,47 @@ const DEFAULT_COLORS = [
   // },
 ];
 
+const DEFAULT_START_POINT: Coordinates = { x: 0, y: VIEWBOX_SIZE };
+const DEFAULT_END_POINT: Coordinates = { x: VIEWBOX_SIZE, y: 0 };
+
+const DEFAULT_FIRST_CONTROL_POINT: Coordinates = { x: 0, y: 0 };
+const DEFAULT_SECOND_CONTROL_POINT: Coordinates = { x: 228, y: 228 };
+
 function App() {
   const [colors, setColors] = useState(DEFAULT_COLORS);
   const [precision, setPrecision] = useState(1);
   const [angle, setAngle] = useState(0);
+  const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>(
+    DEFAULT_FIRST_CONTROL_POINT
+  );
+  const [secondControlPoint, setSecondControlPoint] = useState<Coordinates>(
+    DEFAULT_SECOND_CONTROL_POINT
+  );
+  const [startPoint, setStartPoint] =
+    useState<Coordinates>(DEFAULT_START_POINT);
+  const [endPoint, setEndPoint] = useState<Coordinates>(DEFAULT_END_POINT);
 
   const parsedColors = colors.flatMap((colorObj) =>
     colorObj.color ? [colorObj.color] : []
   );
 
+  const gradientStops = useMemo(() => {
+    const stops = generateGradientStops(
+      precision,
+      startPoint,
+      firstControlPoint,
+      secondControlPoint,
+      endPoint
+    );
+
+    return stops;
+  }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
+
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
     .mode("lch")
-    .colors(precision + colors.length)
-    .map((color) => chroma(color).css());
+    .colors(gradientStops.length)
+    .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
 
   console.log(colorsWithMidpoints, "with midpoints");
 
@@ -92,9 +130,15 @@ function App() {
       <AnglePicker angle={angle} setAngle={setAngle} />
 
       <Bezier
-        viewBoxWidth={230}
-        viewBoxHeight={230}
         precision={precision + colors.length}
+        startPoint={startPoint}
+        endPoint={endPoint}
+        onFirstControlPointChange={setFirstControlPoint}
+        onEndPointChange={setEndPoint}
+        onSecondControlPointChange={setSecondControlPoint}
+        onStartPointChange={setStartPoint}
+        firstControlPoint={firstControlPoint}
+        secondControlPoint={secondControlPoint}
       />
     </div>
   );
