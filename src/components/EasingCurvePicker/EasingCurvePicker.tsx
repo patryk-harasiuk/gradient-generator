@@ -2,9 +2,9 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import styles from "./EasingCurvePicker.module.css";
 import type { Coordinates } from "../../types";
+import { VIEWBOX_SIZE } from "../../const";
 
 type Props = {
-  precision: number;
   firstControlPoint: Coordinates;
   secondControlPoint: Coordinates;
   startPoint: Coordinates;
@@ -15,10 +15,7 @@ type Props = {
   onEndPointChange: (coords: Coordinates) => void;
 };
 
-const VIEWBOX_SIZE = 228;
-
 export const Bezier = ({
-  precision,
   firstControlPoint,
   secondControlPoint,
   onFirstControlPointChange,

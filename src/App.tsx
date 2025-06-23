@@ -9,6 +9,7 @@ import { GradientBackground } from "./components/GradientBackground/GradientBack
 import { Header } from "./components/Header/Header.tsx";
 import type { Coordinates } from "./types.ts";
 import { generateGradientStops } from "./utils/generateGradientStops.ts";
+import { VIEWBOX_SIZE } from "./const.ts";
 
 type Bezier = {
   startPoint: Coordinates;
@@ -17,7 +18,6 @@ type Bezier = {
   endPoint: Coordinates;
   draggingPointId: string | null;
 };
-const VIEWBOX_SIZE = 228;
 
 const DEFAULT_COLORS = [
   {
@@ -44,7 +44,6 @@ const DEFAULT_COLORS = [
 
 const DEFAULT_START_POINT: Coordinates = { x: 0, y: VIEWBOX_SIZE };
 const DEFAULT_END_POINT: Coordinates = { x: VIEWBOX_SIZE, y: 0 };
-
 const DEFAULT_FIRST_CONTROL_POINT: Coordinates = { x: 0, y: 0 };
 const DEFAULT_SECOND_CONTROL_POINT: Coordinates = { x: 228, y: 228 };
 
@@ -68,7 +67,7 @@ function App() {
 
   const gradientStops = useMemo(() => {
     const stops = generateGradientStops(
-      precision,
+      precision + 1,
       startPoint,
       firstControlPoint,
       secondControlPoint,
@@ -77,11 +76,17 @@ function App() {
 
     return stops;
   }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
-
+  console.log(
+    chroma
+      .scale(parsedColors)
+      .mode("lch")
+      .colors(precision + parsedColors.length),
+    "cokolr"
+  );
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
     .mode("lch")
-    .colors(gradientStops.length)
+    .colors(precision + parsedColors.length)
     .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
 
   console.log(colorsWithMidpoints, "with midpoints");
@@ -130,7 +135,6 @@ function App() {
       <AnglePicker angle={angle} setAngle={setAngle} />
 
       <Bezier
-        precision={precision + colors.length}
         startPoint={startPoint}
         endPoint={endPoint}
         onFirstControlPointChange={setFirstControlPoint}
