@@ -1,6 +1,12 @@
 * {
   box-sizing: border-box;
 }
+/* src: url('../public/fonts/PlusJakartaSans-ExtraLight.ttf') format('truetype'); */
+@font-face {
+  font-family: "Consolas";
+  src: url("../src/assets/fonts/consolas.ttf") format("truetype");
+  font-display: swap;
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -132,7 +138,6 @@ dialog::backdrop {
   font-weight: var(--font-weight-medium);
   text-align: left;
 }
-
 
 @keyframes fadeIn {
   0% {
