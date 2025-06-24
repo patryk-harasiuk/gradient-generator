@@ -10,6 +10,8 @@ import { Header } from "./components/Header/Header.tsx";
 import type { Coordinates } from "./types.ts";
 import { generateGradientStops } from "./utils/generateGradientStops.ts";
 import { VIEWBOX_SIZE } from "./const.ts";
+import { YourGradient } from "./components/YourGradient/YourGradient.tsx";
+import { formatGradientCssBlock } from "./utils/formatGradientCssBlock.ts";
 
 type Bezier = {
   startPoint: Coordinates;
@@ -89,9 +91,12 @@ function App() {
     .colors(precision + parsedColors.length)
     .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
 
-  console.log(colorsWithMidpoints, "with midpoints");
-
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
+  const codeSnippet = `.gradient {${backgroundImage}}`;
+
+  const formattedCss = formatGradientCssBlock(backgroundImage);
+
+  console.log(formattedCss, "bg");
 
   useEffect(() => {
     document.documentElement.style.setProperty("--gradient", backgroundImage);
@@ -144,6 +149,8 @@ function App() {
         firstControlPoint={firstControlPoint}
         secondControlPoint={secondControlPoint}
       />
+
+      <YourGradient codeSnippet={formatGradientCssBlock(codeSnippet)} />
     </div>
   );
 }
