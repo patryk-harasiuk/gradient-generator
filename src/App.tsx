@@ -78,13 +78,7 @@ function App() {
 
     return stops;
   }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
-  console.log(
-    chroma
-      .scale(parsedColors)
-      .mode("lch")
-      .colors(precision + parsedColors.length),
-    "cokolr"
-  );
+
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
     .mode("lch")
@@ -93,10 +87,6 @@ function App() {
 
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
   const codeSnippet = `.gradient {${backgroundImage}}`;
-
-  const formattedCss = formatGradientCssBlock(backgroundImage);
-
-  console.log(formattedCss, "bg");
 
   useEffect(() => {
     document.documentElement.style.setProperty("--gradient", backgroundImage);

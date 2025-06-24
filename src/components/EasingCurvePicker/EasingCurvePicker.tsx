@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import styles from "./EasingCurvePicker.module.css";
 import type { Coordinates } from "../../types";

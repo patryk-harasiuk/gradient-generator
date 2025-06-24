@@ -29,6 +29,8 @@ export const YourGradient = ({ codeSnippet }: Props) => {
     };
   }, [codeSnippet]);
 
+  // #TODO: Add copying gradient snippet feature
+
   return (
     <div
       dangerouslySetInnerHTML={{ __html: html }}
