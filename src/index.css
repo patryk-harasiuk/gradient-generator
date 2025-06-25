@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-/* src: url('../public/fonts/PlusJakartaSans-ExtraLight.ttf') format('truetype'); */
+
 @font-face {
   font-family: "Consolas";
   src: url("../src/assets/fonts/consolas.ttf") format("truetype");
@@ -9,7 +9,7 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, Consolas, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -83,12 +83,10 @@ dialog::backdrop {
   display: flex;
   width: 100%;
   max-width: 1200px;
-
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 16px;
-
+  gap: 64px;
   isolation: isolate;
 }
 

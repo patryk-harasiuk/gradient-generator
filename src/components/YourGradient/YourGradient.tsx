@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import styles from "./YourGradient.module.css";
 import { getHighlighterSingleton } from "../../utils/shiki";
 
@@ -8,6 +9,7 @@ type Props = {
 
 export const YourGradient = ({ codeSnippet }: Props) => {
   const [html, setHtml] = useState("Loading...");
+  const [isCopying, setIsCopying] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -29,12 +31,69 @@ export const YourGradient = ({ codeSnippet }: Props) => {
     };
   }, [codeSnippet]);
 
-  // #TODO: Add copying gradient snippet feature
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(codeSnippet);
+      setIsCopying(true);
+      setTimeout(() => setIsCopying(false), 1000);
+    } catch (error) {
+      console.error("Error happened during copying", error);
+    }
+  };
 
   return (
-    <div
-      dangerouslySetInnerHTML={{ __html: html }}
-      className={styles.shikiWrapper}
-    />
+    <div className={styles.wrapper}>
+      <div className={styles.textWrapper}>
+        <span>Your Gradient: </span>
+      </div>
+      <div
+        dangerouslySetInnerHTML={{ __html: html }}
+        className={styles.shikiWrapper}
+      />
+      <button
+        className={styles.copyButton}
+        disabled={isCopying}
+        onClick={handleCopy}
+      >
+        <span>
+          <CodeIcon />
+        </span>
+
+        <div className={styles.buttonTextWrapper}>
+          <span
+            className={`${styles.buttonText} ${
+              isCopying ? styles.hidden : styles.visible
+            }`}
+          >
+            Copy CSS
+          </span>
+
+          <span
+            className={`${styles.buttonText} ${styles.overlay} ${
+              isCopying ? styles.visible : styles.hidden
+            }`}
+          >
+            Copied!
+          </span>
+        </div>
+      </button>
+    </div>
   );
 };
+
+const CodeIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m16 18 6-6-6-6" />
+    <path d="m8 6-6 6 6 6" />
+  </svg>
+);
