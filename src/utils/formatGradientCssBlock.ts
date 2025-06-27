@@ -1,5 +1,5 @@
-export function formatGradientCssBlock(input: string): string {
-  const match = input.match(/linear-gradient\((.*)\)/);
+export function formatGradientCssBlock(gradientString: string): string {
+  const match = gradientString.match(/linear-gradient\((.*)\)/);
   if (!match) {
     return `.gradient {\n  background-image: linear-gradient();\n}`;
   }
