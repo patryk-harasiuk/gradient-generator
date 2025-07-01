@@ -29,11 +29,6 @@ export const ColorPickerDialog = ({ closeModal }: Props) => {
     const clickedBackdrop =
       modalRef.current &&
       !event.nativeEvent.composedPath().includes(modalRef.current);
-    console.log(
-      modalRef.current &&
-        event.nativeEvent.composedPath().includes(modalRef.current),
-      "composedPath"
-    );
 
     if (clickedBackdrop) setToClosing();
   };
