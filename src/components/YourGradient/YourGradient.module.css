@@ -12,7 +12,12 @@
 
 .shikiWrapper span {
   font-family: "Consolas", monospace;
-  font-size: 0.875rem;
+  font-size: 1rem;
+}
+
+.shikiWrapper .pre {
+  background: var(--background--color);
+  line-height: 1.6;
 }
 
 .shikiWrapper :global(pre.shiki) {
@@ -21,8 +26,10 @@
   border-radius: 6px;
   margin: 1em 0;
   overflow-x: auto;
-  line-height: 1.6;
   text-align: left;
+  border-radius: 4px;
+  border: 3px solid var(--color-gray-300);
+  border-radius: 6px;
 }
 
 .image {
@@ -41,7 +48,7 @@
   padding: 8px 12px;
   border-radius: 4px;
   border: 1px solid var(--color-gray-300);
-  background: var(--color-background);
+  background: var(--background--color);
 
   transition: opacity 0.2s ease;
 
@@ -52,7 +59,7 @@
   opacity: 0.6;
   cursor: not-allowed;
 
-  background: var(--color-background);
+  background: var(--background--color);
   color: var(--color-text);
   border-color: var(--color-gray-300);
 }

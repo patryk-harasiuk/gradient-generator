@@ -127,18 +127,20 @@ function App() {
 
       <PrecisionInput value={precision} setPrecision={setPrecision} />
 
-      <AnglePicker angle={angle} setAngle={setAngle} />
+      <div className="pickers">
+        <AnglePicker angle={angle} setAngle={setAngle} />
 
-      <Bezier
-        startPoint={startPoint}
-        endPoint={endPoint}
-        onFirstControlPointChange={setFirstControlPoint}
-        onEndPointChange={setEndPoint}
-        onSecondControlPointChange={setSecondControlPoint}
-        onStartPointChange={setStartPoint}
-        firstControlPoint={firstControlPoint}
-        secondControlPoint={secondControlPoint}
-      />
+        <Bezier
+          startPoint={startPoint}
+          endPoint={endPoint}
+          onFirstControlPointChange={setFirstControlPoint}
+          onEndPointChange={setEndPoint}
+          onSecondControlPointChange={setSecondControlPoint}
+          onStartPointChange={setStartPoint}
+          firstControlPoint={firstControlPoint}
+          secondControlPoint={secondControlPoint}
+        />
+      </div>
 
       <YourGradient codeSnippet={formatGradientCssBlock(codeSnippet)} />
     </div>

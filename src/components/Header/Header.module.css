@@ -1,6 +1,6 @@
 .heading {
   margin-bottom: 0px;
-  font-size: 4rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: transparent;
   background: conic-gradient(
     #d9d7f1 12%,
@@ -62,6 +62,7 @@
 .paragraph {
   color: var(--color-gray-700);
   font-size: 1.25rem;
+  margin: 8px auto 0;
 }
 
 .wrapper {
