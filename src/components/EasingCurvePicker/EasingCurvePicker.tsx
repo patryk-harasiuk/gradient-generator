@@ -89,7 +89,7 @@ export const Bezier = ({
 
   return (
     <div className={styles.wrapper}>
-      <span className={styles.info}>Easing Curve:</span>
+      <div className={styles.info}>Easing Curve:</div>
 
       <div className={styles.boxWrapper}>
         <div className={styles.svgWrapper}>
