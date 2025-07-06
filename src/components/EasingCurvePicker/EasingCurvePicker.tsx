@@ -3,6 +3,12 @@ import styles from "./EasingCurvePicker.module.css";
 import type { Coordinates } from "../../types";
 import { VIEWBOX_SIZE } from "../../const";
 
+const LINEAR_FIRST_CONTROL_POINT = { x: 76, y: 152 };
+const LINEAR_SECOND_CONTROL_POINT = { x: 152, y: 76 };
+
+const FUN_FIRST_CONTROL_POINT = { x: 0, y: 0 };
+const FUN_SECOND_CONTROL_POINT = { x: 228, y: 228 };
+
 type Props = {
   firstControlPoint: Coordinates;
   secondControlPoint: Coordinates;
@@ -87,6 +93,16 @@ export const Bezier = ({
       ${endPoint.x},${endPoint.y}
   `;
 
+  const setLinear = () => {
+    onFirstControlPointChange(LINEAR_FIRST_CONTROL_POINT);
+    onSecondControlPointChange(LINEAR_SECOND_CONTROL_POINT);
+  };
+
+  const setFun = () => {
+    onFirstControlPointChange(FUN_FIRST_CONTROL_POINT);
+    onSecondControlPointChange(FUN_SECOND_CONTROL_POINT);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>Easing Curve:</div>
@@ -116,6 +132,12 @@ export const Bezier = ({
             />
           </svg>
         </div>
+      </div>
+
+      <div className={styles.buttonsWrapper}>
+        <EasingCurveButton title="Linear" onClick={setLinear} />
+
+        <EasingCurveButton title="Fun" onClick={setFun} />
       </div>
     </div>
   );
@@ -170,4 +192,15 @@ const Handle = ({ coordinates: { x, y }, onMouseDown }: HandleProps) => (
     onMouseDown={onMouseDown}
     style={{ cursor: "-webkit-grab", transform: "translate(-50%, -50%);" }}
   />
+);
+
+type EasingCurveButtonProps = {
+  title: string;
+  onClick: () => void;
+};
+
+const EasingCurveButton = ({ title, onClick }: EasingCurveButtonProps) => (
+  <button onClick={onClick} className={styles.button}>
+    {title}
+  </button>
 );

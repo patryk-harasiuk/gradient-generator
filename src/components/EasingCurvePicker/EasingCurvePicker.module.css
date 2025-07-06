@@ -53,3 +53,25 @@
   right: calc(var(--inset-by));
   bottom: calc(var(--inset-by));
 }
+
+.button {
+  cursor: pointer;
+  padding: 4px 0;
+  font-size: 0.875rem;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--color-gray-100);
+  border-radius: 4px;
+  color: white;
+  background: transparent;
+}
+
+.button:hover {
+  border: 2px solid var(--color-gray-300);
+}
+
+.buttonsWrapper {
+  display: flex;
+  column-gap: 8px;
+}
