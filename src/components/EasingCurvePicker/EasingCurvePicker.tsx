@@ -6,8 +6,8 @@ import { VIEWBOX_SIZE } from "../../const";
 const LINEAR_FIRST_CONTROL_POINT = { x: 76, y: 152 };
 const LINEAR_SECOND_CONTROL_POINT = { x: 152, y: 76 };
 
-const FUN_FIRST_CONTROL_POINT = { x: 0, y: 0 };
-const FUN_SECOND_CONTROL_POINT = { x: 228, y: 228 };
+const FUN_FIRST_CONTROL_POINT = { x: -16, y: -16 };
+const FUN_SECOND_CONTROL_POINT = { x: 244, y: 244 };
 
 type BezierType = "linear" | "fun";
 
@@ -21,6 +21,15 @@ type Props = {
   onStartPointChange: (coords: Coordinates) => void;
   onEndPointChange: (coords: Coordinates) => void;
 };
+
+const HANDLE_MARGIN = 16;
+
+const clampWithMargin = (
+  value: number,
+  min: number,
+  max: number,
+  margin: number
+) => Math.max(min - margin, Math.min(max + margin, value));
 
 export const Bezier = ({
   firstControlPoint,
@@ -42,28 +51,31 @@ export const Bezier = ({
 
     const svgRect = svgRef.current.getBoundingClientRect();
 
-    if (
-      clientX >= svgRect.left &&
-      clientX <= svgRect.right &&
-      clientY >= svgRect.top &&
-      clientY <= svgRect.bottom
-    ) {
-      const svgX = clientX - svgRect.left;
-      const svgY = clientY - svgRect.top;
+    const svgX = clientX - svgRect.left;
+    const svgY = clientY - svgRect.top;
 
-      const viewBoxX = (svgX * VIEWBOX_SIZE) / svgRect.width;
-      const viewBoxY = (svgY * VIEWBOX_SIZE) / svgRect.height;
+    const viewBoxX = clampWithMargin(
+      (svgX * VIEWBOX_SIZE) / svgRect.width,
+      0,
+      VIEWBOX_SIZE,
+      HANDLE_MARGIN
+    );
+    const viewBoxY = clampWithMargin(
+      (svgY * VIEWBOX_SIZE) / svgRect.height,
+      0,
+      VIEWBOX_SIZE,
+      HANDLE_MARGIN
+    );
 
-      if (isStartPoint) onStartPointChange({ x: viewBoxX, y: viewBoxY });
+    if (isStartPoint) onStartPointChange({ x: viewBoxX, y: viewBoxY });
 
-      if (isFirstControlPoint)
-        onFirstControlPointChange({ x: viewBoxX, y: viewBoxY });
+    if (isFirstControlPoint)
+      onFirstControlPointChange({ x: viewBoxX, y: viewBoxY });
 
-      if (isSecondControlPoint)
-        onSecondControlPointChange({ x: viewBoxX, y: viewBoxY });
+    if (isSecondControlPoint)
+      onSecondControlPointChange({ x: viewBoxX, y: viewBoxY });
 
-      if (isEndPoint) onEndPointChange({ x: viewBoxX, y: viewBoxY });
-    }
+    if (isEndPoint) onEndPointChange({ x: viewBoxX, y: viewBoxY });
   };
 
   const handleMouseDown = (pointId: string) => {
@@ -110,7 +122,7 @@ export const Bezier = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.info}>Easing Curve:</div>
+      <span className={styles.info}>Easing Curve:</span>
 
       <div className={styles.boxWrapper}>
         <div className={styles.svgWrapper}>
@@ -212,13 +224,6 @@ type EasingCurveButtonProps = {
   onClick: () => void;
   isActive?: boolean;
 };
-
-{
-  /* <span
-className={`${styles.buttonText} ${
-  isCopying ? styles.hidden : styles.visible
-}`} */
-}
 
 const EasingCurveButton = ({
   title,

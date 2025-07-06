@@ -155,7 +155,6 @@ dialog::backdrop {
   flex-direction: column;
   gap: 48px;
   justify-content: center;
-  align-items: center;
 
   @media (min-width: 640px) {
     flex-direction: row;
