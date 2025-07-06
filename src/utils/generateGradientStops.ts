@@ -11,7 +11,7 @@ const getCubicBezier = (t: number, coordinates: Coordinates[]) => {
 
   const u = 1 - t;
 
-  // This is Cubic Bezier Curve formula
+  // Cubic Bezier Curve formula
   return (
     Math.pow(u, 3) * startPoint.y +
     3 * Math.pow(u, 2) * t * firstPoint.y +

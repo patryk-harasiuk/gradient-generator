@@ -24,11 +24,11 @@ type Bezier = {
 const DEFAULT_COLORS = [
   {
     id: 1,
-    color: "#1f005c",
+    color: "#000066",
   },
   {
     id: 2,
-    color: "#ffb56b",
+    color: "#FFEA00",
   },
   // {
   //   id: 3,
@@ -46,13 +46,13 @@ const DEFAULT_COLORS = [
 
 const DEFAULT_START_POINT: Coordinates = { x: 0, y: VIEWBOX_SIZE };
 const DEFAULT_END_POINT: Coordinates = { x: VIEWBOX_SIZE, y: 0 };
-const DEFAULT_FIRST_CONTROL_POINT: Coordinates = { x: 0, y: 0 };
-const DEFAULT_SECOND_CONTROL_POINT: Coordinates = { x: 228, y: 228 };
+const DEFAULT_FIRST_CONTROL_POINT = { x: 76, y: 152 };
+const DEFAULT_SECOND_CONTROL_POINT = { x: 152, y: 76 };
 
 function App() {
   const [colors, setColors] = useState(DEFAULT_COLORS);
-  const [precision, setPrecision] = useState(1);
-  const [angle, setAngle] = useState(0);
+  const [precision, setPrecision] = useState(4);
+  const [angle, setAngle] = useState(45);
   const [firstControlPoint, setFirstControlPoint] = useState<Coordinates>(
     DEFAULT_FIRST_CONTROL_POINT
   );
@@ -81,7 +81,7 @@ function App() {
 
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
-    .mode("lch")
+    .mode("hcl")
     .colors(precision + parsedColors.length)
     .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
 
