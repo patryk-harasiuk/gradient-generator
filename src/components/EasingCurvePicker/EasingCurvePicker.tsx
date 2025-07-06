@@ -9,6 +9,8 @@ const LINEAR_SECOND_CONTROL_POINT = { x: 152, y: 76 };
 const FUN_FIRST_CONTROL_POINT = { x: 0, y: 0 };
 const FUN_SECOND_CONTROL_POINT = { x: 228, y: 228 };
 
+type BezierType = "linear" | "fun";
+
 type Props = {
   firstControlPoint: Coordinates;
   secondControlPoint: Coordinates;
@@ -31,6 +33,7 @@ export const Bezier = ({
   startPoint,
 }: Props) => {
   const [draggingPointId, setDraggingPointId] = useState<string | null>(null);
+  const [bezierType, setBezierType] = useState<BezierType>("linear");
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
     if (!draggingPointId || !svgRef.current) {
@@ -96,11 +99,13 @@ export const Bezier = ({
   const setLinear = () => {
     onFirstControlPointChange(LINEAR_FIRST_CONTROL_POINT);
     onSecondControlPointChange(LINEAR_SECOND_CONTROL_POINT);
+    setBezierType("linear");
   };
 
   const setFun = () => {
     onFirstControlPointChange(FUN_FIRST_CONTROL_POINT);
     onSecondControlPointChange(FUN_SECOND_CONTROL_POINT);
+    setBezierType("fun");
   };
 
   return (
@@ -135,9 +140,17 @@ export const Bezier = ({
       </div>
 
       <div className={styles.buttonsWrapper}>
-        <EasingCurveButton title="Linear" onClick={setLinear} />
+        <EasingCurveButton
+          title="Linear"
+          onClick={setLinear}
+          isActive={bezierType === "linear"}
+        />
 
-        <EasingCurveButton title="Fun" onClick={setFun} />
+        <EasingCurveButton
+          title="Fun"
+          onClick={setFun}
+          isActive={bezierType === "fun"}
+        />
       </div>
     </div>
   );
@@ -197,10 +210,25 @@ const Handle = ({ coordinates: { x, y }, onMouseDown }: HandleProps) => (
 type EasingCurveButtonProps = {
   title: string;
   onClick: () => void;
+  isActive?: boolean;
 };
 
-const EasingCurveButton = ({ title, onClick }: EasingCurveButtonProps) => (
-  <button onClick={onClick} className={styles.button}>
+{
+  /* <span
+className={`${styles.buttonText} ${
+  isCopying ? styles.hidden : styles.visible
+}`} */
+}
+
+const EasingCurveButton = ({
+  title,
+  onClick,
+  isActive,
+}: EasingCurveButtonProps) => (
+  <button
+    onClick={onClick}
+    className={`${styles.button} ${isActive && styles.buttonActive}`}
+  >
     {title}
   </button>
 );

@@ -75,3 +75,11 @@
   display: flex;
   column-gap: 8px;
 }
+
+.buttonActive {
+  background: var(--color-gray-100);
+}
+
+.buttonActive:hover {
+  border: 2px solid var(--color-gray-100);
+}
