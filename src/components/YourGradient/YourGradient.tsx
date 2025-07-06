@@ -44,7 +44,7 @@ export const YourGradient = ({ codeSnippet }: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.textWrapper}>
-        <span>Your Gradient: </span>
+        <span className={styles.text}>Your Gradient: </span>
       </div>
       <div
         dangerouslySetInnerHTML={{ __html: html }}

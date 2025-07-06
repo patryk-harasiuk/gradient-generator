@@ -97,3 +97,7 @@
 .visible {
   opacity: 1;
 }
+
+.text {
+  font-weight: var(--font-weight-bold);
+}
