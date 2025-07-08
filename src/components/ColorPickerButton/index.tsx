@@ -5,8 +5,6 @@ type Props = {
   value: string;
 };
 
-// const DEFAULT_COLOR_PICK = "#ff0000";
-
 export const ColorPickerButton = ({ setColor, value }: Props) => {
   return (
     <div className={styles.colorBoxWrapper}>
@@ -21,3 +19,9 @@ export const ColorPickerButton = ({ setColor, value }: Props) => {
     </div>
   );
 };
+
+export const InactiveColorBox = () => (
+  <div className={styles.inactiveButton}>
+    <div className={styles.iconWrapper}></div>
+  </div>
+);

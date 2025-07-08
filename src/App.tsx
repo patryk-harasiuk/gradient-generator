@@ -111,13 +111,22 @@ function App() {
       <div className="colors-box">
         <span>Colors:</span>
 
-        <ul>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}
+        >
           {colors.map((colorObj) => {
             return (
-              <li key={colorObj.id}>
+              <li key={colorObj.id} style={{ margin: 0 }}>
                 <ColorPickerButton
-                  setColor={() => handleColorChange(colorObj.id)}
-                  value={colorObj.color}
+                  setColor={handleColorChange(colorObj.id)}
+                  color={colorObj.color}
                 />
               </li>
             );

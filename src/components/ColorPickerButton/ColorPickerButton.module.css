@@ -2,7 +2,7 @@
   display: block;
   cursor: pointer;
   position: relative;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   min-height: 60px;
   border-radius: 6px;
   border: 3px solid var(--border-color);
@@ -12,23 +12,23 @@
 .colorBox {
   position: absolute;
   inset: 3px;
-
   width: calc(100% - 6px);
   height: calc(100% - 6px);
   border-radius: 2px;
   background: var(--color-background);
-
   border: none;
+  cursor: pointer;
+  appearance: none;
+  padding: 0;
 }
 
 .inactiveButton {
   display: block;
   cursor: pointer;
   position: relative;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   min-height: 60px;
   border-radius: 6px;
-
   border: 3px solid var(--color-gray-100);
   background: var(--color-background);
 }
@@ -40,4 +40,7 @@
   height: 32px;
   margin: auto;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
