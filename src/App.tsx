@@ -30,18 +30,18 @@ const DEFAULT_COLORS = [
     id: 2,
     color: "#FFEA00",
   },
-  // {
-  //   id: 3,
-  //   color: "",
-  // },
-  // {
-  //   id: 4,
-  //   color: "",
-  // },
-  // {
-  //   id: 5,
-  //   color: "",
-  // },
+  {
+    id: 3,
+    color: "",
+  },
+  {
+    id: 4,
+    color: "",
+  },
+  {
+    id: 5,
+    color: "",
+  },
 ];
 
 const DEFAULT_START_POINT: Coordinates = { x: 0, y: VIEWBOX_SIZE };
@@ -79,11 +79,18 @@ function App() {
     return stops;
   }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
 
+  const numStops = precision + parsedColors.length;
+
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
     .mode("hcl")
-    .colors(precision + parsedColors.length)
-    .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
+    .colors(numStops)
+    .map((color, index) => {
+      console.log(gradientStops[index], "gradientStop[index]");
+      const stop =
+        gradientStops[index] ?? Math.round((index / (numStops - 1)) * 100);
+      return `${chroma(color).css()} ${stop}%`;
+    });
 
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
   const codeSnippet = `.gradient {${backgroundImage}}`;
@@ -126,7 +133,11 @@ function App() {
               <li key={colorObj.id} style={{ margin: 0 }}>
                 <ColorPickerButton
                   setColor={handleColorChange(colorObj.id)}
-                  color={colorObj.color}
+                  color={colorObj.color || "##000000"}
+                  disabled={
+                    colorObj.id > 1 &&
+                    !colors.find((c) => c.id === colorObj.id - 1)?.color
+                  }
                 />
               </li>
             );

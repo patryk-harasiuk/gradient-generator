@@ -2,16 +2,22 @@ import styles from "./ColorPickerButton.module.css";
 
 type Props = {
   setColor: (value: string) => void;
-  value: string;
+  color: string;
+  disabled?: boolean;
 };
 
-export const ColorPickerButton = ({ setColor, value }: Props) => {
+export const ColorPickerButton = ({ setColor, color, disabled }: Props) => {
+  const hasNoColor = !color;
+
   return (
-    <div className={styles.colorBoxWrapper}>
+    <div
+      className={`${styles.colorBoxWrapper} ${hasNoColor && styles.empty} ${disabled && styles.disabled}`}
+    >
       <input
         className={styles.colorBox}
         type="color"
-        value={value}
+        value={color}
+        disabled={disabled}
         onChange={(e) => {
           setColor(e.target.value);
         }}
@@ -19,9 +25,3 @@ export const ColorPickerButton = ({ setColor, value }: Props) => {
     </div>
   );
 };
-
-export const InactiveColorBox = () => (
-  <div className={styles.inactiveButton}>
-    <div className={styles.iconWrapper}></div>
-  </div>
-);

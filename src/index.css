@@ -97,6 +97,7 @@ dialog::backdrop {
   flex-direction: column;
   justify-content: center;
   min-height: 1.625rem;
+  row-gap: 8px;
 }
 
 .colors-box ul {

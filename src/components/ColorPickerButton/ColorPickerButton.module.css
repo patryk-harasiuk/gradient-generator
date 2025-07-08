@@ -44,3 +44,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.empty {
+  background: repeating-conic-gradient(#ccc 0% 25%, #eee 0% 50%) 0 / 20px 20px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
