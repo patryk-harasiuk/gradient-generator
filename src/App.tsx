@@ -79,18 +79,11 @@ function App() {
     return stops;
   }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
 
-  const numStops = precision + parsedColors.length;
-
   const colorsWithMidpoints = chroma
     .scale(parsedColors)
     .mode("hcl")
-    .colors(numStops)
-    .map((color, index) => {
-      console.log(gradientStops[index], "gradientStop[index]");
-      const stop =
-        gradientStops[index] ?? Math.round((index / (numStops - 1)) * 100);
-      return `${chroma(color).css()} ${stop}%`;
-    });
+    .colors(gradientStops.length)
+    .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
 
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
   const codeSnippet = `.gradient {${backgroundImage}}`;

@@ -41,16 +41,10 @@ export const generateGradientStops = (
 
     const percent = Math.floor((1 - easedY / maxY) * 100);
     stops.push(percent);
-
-    // const cssStops = Array.from({ length: stepsCount * 2 }, (_, i) => {
-    //   const t = i / (stepsCount * 2 - 1);
-    //   const easedY_normalized =
-    //     1 -
-    //     getCubicBezier(t, [startPoint, firstPoint, secondPoint, endPoint]) /
-    //       startPoint.y;
-    //   return `hsl(210, ${easedY_normalized * 80}%, ${20 + easedY_normalized * 50}%) ${t * 100}%`;
-    // }).join(", ");
   }
+
+  // stops[0] = 0;
+  // stops[stops.length - 1] = 100;
 
   return stops;
 };
