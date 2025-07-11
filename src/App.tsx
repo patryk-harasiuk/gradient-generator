@@ -63,13 +63,18 @@ function App() {
     useState<Coordinates>(DEFAULT_START_POINT);
   const [endPoint, setEndPoint] = useState<Coordinates>(DEFAULT_END_POINT);
 
-  const parsedColors = colors.flatMap((colorObj) =>
-    colorObj.color ? [colorObj.color] : []
+  const parsedColors = useMemo(
+    () => colors.filter((c) => !!c.color).map((c) => c.color),
+    [colors]
   );
+
+  // co
+
+  const numberOfStops = parsedColors.length + precision - 1;
 
   const gradientStops = useMemo(() => {
     const stops = generateGradientStops(
-      precision + 1,
+      numberOfStops,
       startPoint,
       firstControlPoint,
       secondControlPoint,
@@ -77,13 +82,24 @@ function App() {
     );
 
     return stops;
-  }, [precision, startPoint, firstControlPoint, secondControlPoint, endPoint]);
+  }, [
+    numberOfStops,
+    startPoint,
+    firstControlPoint,
+    secondControlPoint,
+    endPoint,
+  ]);
 
-  const colorsWithMidpoints = chroma
-    .scale(parsedColors)
-    .mode("hcl")
-    .colors(gradientStops.length)
-    .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
+  const colorsWithMidpoints = useMemo(() => {
+    return chroma
+      .scale(parsedColors)
+      .mode("hcl")
+      .colors(gradientStops.length)
+      .map((color, index) => {
+        console.log("ddddd");
+        return `${chroma(color).css()} ${gradientStops[index]}%`;
+      });
+  }, [parsedColors, gradientStops]);
 
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
   const codeSnippet = `.gradient {${backgroundImage}}`;
