@@ -1,7 +1,7 @@
 import "./App.css";
 import chroma from "chroma-js";
 import { useEffect, useMemo, useState } from "react";
-import { ColorPickerButton } from "./components/ColorPickerButton";
+
 import { PrecisionInput } from "./components/PrecisionInput";
 import { AnglePicker } from "./components/AnglePicker";
 import { Bezier } from "./components/EasingCurvePicker/EasingCurvePicker";
@@ -12,6 +12,7 @@ import { generateGradientStops } from "./utils/generateGradientStops.ts";
 import { VIEWBOX_SIZE } from "./const.ts";
 import { YourGradient } from "./components/YourGradient/YourGradient.tsx";
 import { formatGradientCssBlock } from "./utils/formatGradientCssBlock.ts";
+import { ColorPickingSection } from "./components/ColorPickingSection/index.tsx";
 
 type Bezier = {
   startPoint: Coordinates;
@@ -21,7 +22,12 @@ type Bezier = {
   draggingPointId: string | null;
 };
 
-const DEFAULT_COLORS = [
+export type Color = {
+  id: number;
+  color: string;
+};
+
+const DEFAULT_COLORS: Color[] = [
   {
     id: 1,
     color: "#000066",
@@ -119,25 +125,10 @@ function App() {
     <div className="wrapper">
       <Header />
       <GradientBackground />
-      <div className="colors-box">
-        <span>Colors:</span>
-
-        <ul>
-          {colors.map((colorObj) => {
-            return (
-              <li key={colorObj.id}>
-                <ColorPickerButton
-                  setColor={handleColorChange(colorObj.id)}
-                  color={colorObj.color || "#000000"}
-                  disabled={
-                    !colors.find(({ id }) => id === colorObj.id - 1)?.color
-                  }
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ColorPickingSection
+        colors={colors}
+        handleColorChange={handleColorChange}
+      />
 
       <PrecisionInput value={precision} setPrecision={setPrecision} />
 

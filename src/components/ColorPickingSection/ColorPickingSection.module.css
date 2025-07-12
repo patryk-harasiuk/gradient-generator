@@ -1,0 +1,55 @@
+.colorsBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 1.625rem;
+  row-gap: 8px;
+}
+
+.colorsBox ul {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 16px;
+  list-style-type: none;
+  isolation: isolate;
+}
+/* 
+  .colorsBox li {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 48px;
+  
+    animation-duration: 0ms;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    animation-name: fadeIn;
+  } */
+
+.colorsBox li {
+  position: relative;
+  cursor: pointer;
+  transform: none;
+  user-select: none;
+  touch-action: pan-y;
+
+  will-change: transform;
+}
+
+.colorsBox-item li .grabbing {
+  position: absolute;
+  z-index: 1;
+}
+
+.colorsBox span {
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+}
