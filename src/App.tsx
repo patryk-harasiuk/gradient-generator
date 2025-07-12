@@ -64,11 +64,9 @@ function App() {
   const [endPoint, setEndPoint] = useState<Coordinates>(DEFAULT_END_POINT);
 
   const parsedColors = useMemo(
-    () => colors.filter((c) => !!c.color).map((c) => c.color),
+    () => colors.filter(({ color }) => !!color).map(({ color }) => color),
     [colors]
   );
-
-  // co
 
   const numberOfStops = parsedColors.length + precision - 1;
 
@@ -95,10 +93,7 @@ function App() {
       .scale(parsedColors)
       .mode("hcl")
       .colors(gradientStops.length)
-      .map((color, index) => {
-        console.log("ddddd");
-        return `${chroma(color).css()} ${gradientStops[index]}%`;
-      });
+      .map((color, index) => `${chroma(color).css()} ${gradientStops[index]}%`);
   }, [parsedColors, gradientStops]);
 
   const backgroundImage = `linear-gradient(${angle}deg,${colorsWithMidpoints})`;
@@ -142,10 +137,9 @@ function App() {
               <li key={colorObj.id} style={{ margin: 0 }}>
                 <ColorPickerButton
                   setColor={handleColorChange(colorObj.id)}
-                  color={colorObj.color || "##000000"}
+                  color={colorObj.color || "#000000"}
                   disabled={
-                    colorObj.id > 1 &&
-                    !colors.find((c) => c.id === colorObj.id - 1)?.color
+                    !colors.find(({ id }) => id === colorObj.id - 1)?.color
                   }
                 />
               </li>
