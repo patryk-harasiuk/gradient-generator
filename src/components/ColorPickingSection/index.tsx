@@ -1,4 +1,4 @@
-import { Color } from "../../App";
+import type { Color } from "../../types";
 import style from "./ColorPickingSection.module.css";
 import { useRef } from "react";
 import { ColorPickerButton } from "./ColorPickerButton";

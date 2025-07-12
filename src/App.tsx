@@ -9,7 +9,7 @@ import { GradientBackground } from "./components/GradientBackground/GradientBack
 import { Header } from "./components/Header/Header.tsx";
 import type { Coordinates } from "./types.ts";
 import { generateGradientStops } from "./utils/generateGradientStops.ts";
-import { VIEWBOX_SIZE } from "./const.ts";
+import { DEFAULT_COLORS, VIEWBOX_SIZE } from "./const.ts";
 import { YourGradient } from "./components/YourGradient/YourGradient.tsx";
 import { formatGradientCssBlock } from "./utils/formatGradientCssBlock.ts";
 import { ColorPickingSection } from "./components/ColorPickingSection/index.tsx";
@@ -21,34 +21,6 @@ type Bezier = {
   endPoint: Coordinates;
   draggingPointId: string | null;
 };
-
-export type Color = {
-  id: number;
-  color: string;
-};
-
-const DEFAULT_COLORS: Color[] = [
-  {
-    id: 1,
-    color: "#000066",
-  },
-  {
-    id: 2,
-    color: "#FFEA00",
-  },
-  {
-    id: 3,
-    color: "",
-  },
-  {
-    id: 4,
-    color: "",
-  },
-  {
-    id: 5,
-    color: "",
-  },
-];
 
 const DEFAULT_START_POINT: Coordinates = { x: 0, y: VIEWBOX_SIZE };
 const DEFAULT_END_POINT: Coordinates = { x: VIEWBOX_SIZE, y: 0 };
