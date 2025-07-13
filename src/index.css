@@ -54,11 +54,11 @@
   --color-gray-400: hsl(210deg, 9%, 45%);
   --color-gray-500: hsl(210deg, 8%, 50%);
   --color-gray-600: hsl(210deg, 12%, 55%);
-  --color-gray-700: hsl(210, 14%, 66%);
+  --color-gray-700: #9ca8b4;
   --color-gray-900: hsl(210deg, 25%, 88%);
   --color-gray-1000: hsl(210deg, 25%, 96%);
 
-  --border-color: hsl(210deg, 10%, 40%);
+  --border-color: #454d54;
 }
 
 body {
@@ -67,6 +67,19 @@ body {
   place-items: center;
   min-height: 100vh;
   position: relative;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
 }
 
 dialog::backdrop {

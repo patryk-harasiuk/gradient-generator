@@ -16,23 +16,6 @@
   list-style-type: none;
   isolation: isolate;
 }
-/* 
-  .colorsBox li {
-    position: relative;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 0;
-    min-width: 48px;
-  
-    animation-duration: 0ms;
-    animation-timing-function: ease;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: none;
-    animation-play-state: running;
-    animation-name: fadeIn;
-  } */
 
 .colorsBox li {
   position: relative;
