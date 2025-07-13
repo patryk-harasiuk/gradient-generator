@@ -18,13 +18,10 @@
 }
 
 .colorsBox li {
+  flex: 1 1;
   position: relative;
   cursor: pointer;
   transform: none;
-  user-select: none;
-  touch-action: pan-y;
-
-  will-change: transform;
   transition: transform 0.2s ease;
   cursor: default;
 }

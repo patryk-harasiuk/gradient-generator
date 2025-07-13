@@ -11,10 +11,10 @@ export const ColorPickerButton = ({ setColor, color, disabled }: Props) => {
 
   return (
     <div
-      className={`${styles.colorBoxWrapper} ${hasNoColor && styles.empty} ${disabled && styles.disabled}`}
+      className={`${styles.colorInputWrapper} ${hasNoColor && styles.empty} ${disabled && styles.disabled}`}
     >
       <input
-        className={styles.colorBox}
+        className={styles.colorInput}
         type="color"
         value={color}
         disabled={disabled}
