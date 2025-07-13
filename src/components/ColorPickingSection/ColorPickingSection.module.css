@@ -43,11 +43,11 @@
 
   will-change: transform;
   transition: transform 0.2s ease;
+  cursor: default;
 }
 
-.colorsBox-item li .grabbing {
-  position: absolute;
-  z-index: 1;
+.active {
+  cursor: grab;
 }
 
 .colorsBox span {

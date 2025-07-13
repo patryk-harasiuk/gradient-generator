@@ -25,7 +25,8 @@ export const ColorPickingSection = ({
   //   const colorsRef = useRef<HTMLLinkElement[]>([]);
   const [draggedId, setDraggedId] = useState<number | null>(null);
 
-  const handleDragStart = (id: number) => {
+  const handleDragStart = (id: number, isActive: boolean) => {
+    if (!isActive) return;
     setDraggedId(id);
   };
 
@@ -87,14 +88,10 @@ export const ColorPickingSection = ({
             <li
               key={colorObj.id}
               draggable={isActive}
-              onDragStart={
-                isActive ? () => handleDragStart(colorObj.id) : undefined
-              }
+              onDragStart={() => handleDragStart(colorObj.id, isActive)}
               onDragOver={(event) => handleDragOver(event, isActive)}
               onDrop={isActive ? () => handleDrop(colorObj.id) : undefined}
-              style={{
-                cursor: isActive ? "grab" : "not-allowed",
-              }}
+              className={isActive ? style.active : ""}
             >
               <ColorPickerButton
                 setColor={handleColorChange(colorObj.id)}
