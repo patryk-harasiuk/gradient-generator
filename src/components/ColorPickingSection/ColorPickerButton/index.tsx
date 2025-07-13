@@ -18,8 +18,8 @@ export const ColorPickerButton = ({ setColor, color, disabled }: Props) => {
         type="color"
         value={color}
         disabled={disabled}
-        onChange={(e) => {
-          setColor(e.target.value);
+        onChange={(event) => {
+          setColor(event.target.value);
         }}
       />
     </div>

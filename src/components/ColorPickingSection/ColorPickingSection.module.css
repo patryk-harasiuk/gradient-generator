@@ -42,6 +42,7 @@
   touch-action: pan-y;
 
   will-change: transform;
+  transition: transform 0.2s ease;
 }
 
 .colorsBox-item li .grabbing {

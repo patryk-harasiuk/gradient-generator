@@ -99,6 +99,7 @@ function App() {
       <GradientBackground />
       <ColorPickingSection
         colors={colors}
+        setColors={setColors}
         handleColorChange={handleColorChange}
       />
 
