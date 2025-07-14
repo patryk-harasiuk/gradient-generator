@@ -16,6 +16,8 @@ export const ColorPickingSection = ({
 }: ColorPickingSectionProps) => {
   const [draggedId, setDraggedId] = useState<number | null>(null);
 
+  const activeColorsCount = colors.filter(({ color }) => !!color).length;
+
   const handleDragStart = (id: number, isActive: boolean) => {
     if (!isActive) return;
     setDraggedId(id);
@@ -42,6 +44,17 @@ export const ColorPickingSection = ({
     if (isActive) event.preventDefault();
   };
 
+  const handleRemoveColor = (idToRemove: number) => {
+    const filteredColors = colors.filter(({ id }) => id !== idToRemove);
+
+    const updatedColors = Array.from({ length: colors.length }, (_, index) => ({
+      id: index + 1,
+      color: filteredColors[index]?.color || "",
+    }));
+
+    setColors(updatedColors);
+  };
+
   return (
     <div className={style.colorsBox}>
       <span>Colors:</span>
@@ -61,7 +74,9 @@ export const ColorPickingSection = ({
             >
               <ColorPickerButton
                 setColor={handleColorChange(colorObj.id)}
-                color={colorObj.color || "#000000"}
+                color={colorObj.color}
+                activeColorsCount={activeColorsCount}
+                onRemove={() => handleRemoveColor(colorObj.id)}
                 disabled={
                   colorObj.id > 1 &&
                   !colors.find(({ id }) => id === colorObj.id - 1)?.color

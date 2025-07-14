@@ -30,3 +30,24 @@
   opacity: 0.5;
   pointer-events: none;
 }
+
+.removeButton {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.colorBoxWrapper:hover .removeButton {
+  transform: translate(-50%, 0%);
+  opacity: 1;
+  pointer-events: auto;
+}
