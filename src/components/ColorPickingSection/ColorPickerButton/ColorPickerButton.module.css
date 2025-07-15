@@ -33,21 +33,13 @@
 
 .removeButton {
   position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  color: white;
-  border: none;
-  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.colorBoxWrapper:hover .removeButton {
-  transform: translate(-50%, 0%);
-  opacity: 1;
-  pointer-events: auto;
+  color: #ffff;
 }

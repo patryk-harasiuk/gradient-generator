@@ -1,12 +1,14 @@
 import { useState } from "react";
 import styles from "./ColorPickerButton.module.css";
+import { useSpring, animated } from "@react-spring/web";
+import { RemoveSVG } from "./RemoveSVG";
 
 type Props = {
   setColor: (value: string) => void;
   color: string;
   activeColorsCount: number;
+  onRemove: () => void;
   disabled?: boolean;
-  onRemove?: () => void;
 };
 
 export const ColorPickerButton = ({
@@ -22,6 +24,13 @@ export const ColorPickerButton = ({
   const handleMouseLeave = () => setIsHovered(false);
 
   const shouldShowRemove = activeColorsCount > 1 && color && isHovered;
+
+  const deleteButtonStyles = useSpring({
+    config: { tension: 220, friction: 20 },
+    opacity: isHovered && shouldShowRemove ? 1 : 0,
+    transform:
+      isHovered && shouldShowRemove ? `translateY(0px)` : `translateY(10px)`,
+  });
 
   return (
     <div
@@ -39,9 +48,13 @@ export const ColorPickerButton = ({
         }}
       />
       {shouldShowRemove && (
-        <button className={styles.removeButton} onClick={onRemove}>
-          x
-        </button>
+        <animated.button
+          className={styles.removeButton}
+          style={deleteButtonStyles}
+          onClick={onRemove}
+        >
+          <RemoveSVG />
+        </animated.button>
       )}
     </div>
   );
