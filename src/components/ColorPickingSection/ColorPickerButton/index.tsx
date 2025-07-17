@@ -1,4 +1,4 @@
-import styles from "./ColorPickerButton.module.css";
+import styles from "./ColorPickerInput.module.css";
 import { RemoveSVG } from "./RemoveSVG";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   onRemove?: () => void;
 };
 
-export const ColorPickerButton = ({
+export const ColorPickerInput = ({
   setColor,
   color,
   activeColorsCount,
@@ -19,18 +19,18 @@ export const ColorPickerButton = ({
   const shouldShowRemove = activeColorsCount > 1 && color;
 
   return (
-    <div
-      className={`${styles.colorInputWrapper} ${!color && styles.empty} ${disabled && styles.disabled}`}
-    >
-      <input
-        className={styles.colorInput}
-        type="color"
-        value={color}
-        disabled={disabled}
-        onChange={(event) => {
-          setColor(event.target.value);
-        }}
-      />
+    <div className={styles.colorPickerInputWrapper}>
+      <div className={`${styles.inputWrapper} ${disabled && styles.disabled}`}>
+        <input
+          className={styles.input}
+          type="color"
+          value={color}
+          disabled={disabled}
+          onChange={(event) => {
+            setColor(event.target.value);
+          }}
+        />
+      </div>
       {shouldShowRemove && (
         <button className={`${styles.removeButton}`} onClick={onRemove}>
           <RemoveSVG />

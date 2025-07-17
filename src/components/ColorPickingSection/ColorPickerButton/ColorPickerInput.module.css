@@ -1,15 +1,15 @@
-.colorInputWrapper {
+.inputWrapper {
   display: block;
-  cursor: pointer;
   position: relative;
   aspect-ratio: 1 / 1;
   min-height: 60px;
+  background: var(--color-background);
   border-radius: 6px;
   border: 3px solid var(--border-color);
-  background: var(--color-background);
+  z-index: 1;
 }
 
-.colorInput {
+.input {
   position: absolute;
   inset: 3px;
   width: calc(100% - 6px);
@@ -22,10 +22,6 @@
   padding: 0;
 }
 
-.empty {
-  background: repeating-conic-gradient(#ccc 0% 25%, #eee 0% 50%) 0 / 20px 20px;
-}
-
 .disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -34,28 +30,27 @@
 .removeButton {
   border: none;
   background: none;
-  --size: 40px;
   position: absolute;
   z-index: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--size);
-  height: var(--size);
   margin: 0 auto;
   opacity: 0;
-  border-radius: 50%;
-  transform: translateY(-40px);
+  transform: translateY(0px);
   transition:
     opacity 0.2s,
     transform 0.3s;
   color: #fff;
+  cursor: pointer;
 }
 
-.colorInputWrapper:hover .removeButton {
+.colorPickerInputWrapper:hover .removeButton {
   opacity: 1;
   transform: translateY(40px);
 }

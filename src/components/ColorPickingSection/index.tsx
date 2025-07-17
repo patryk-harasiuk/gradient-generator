@@ -1,7 +1,7 @@
 import type { Color } from "../../types";
 import style from "./ColorPickingSection.module.css";
 import { useState, DragEvent } from "react";
-import { ColorPickerButton } from "./ColorPickerButton";
+import { ColorPickerInput } from "./ColorPickerButton";
 
 type ColorPickingSectionProps = {
   colors: Color[];
@@ -72,7 +72,7 @@ export const ColorPickingSection = ({
               onDrop={isActive ? () => handleDrop(colorObj.id) : undefined}
               className={isActive ? style.active : ""}
             >
-              <ColorPickerButton
+              <ColorPickerInput
                 setColor={handleColorChange(colorObj.id)}
                 color={colorObj.color}
                 activeColorsCount={activeColorsCount}
