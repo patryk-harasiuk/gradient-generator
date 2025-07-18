@@ -20,4 +20,4 @@ I used yet another color mode - HCL, which is more suitable for human vision.
 ## TODO
 
 - add generating random gradients on click
-- add option to change between differen color modes - rbg, hsl etc
+- add option to change between different color modes - RGB, HSL etc
