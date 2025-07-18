@@ -4,9 +4,9 @@ Create gradients that you can use in your CSS
 
 Change available options until you generate gradient you like. You can increase precision (the number of in-between colors), change angle and manipulate color-stops (the position of where colors start transitioning from one to the next) using bezier-curve.
 
-<img width="709" height="740" alt="Image" src="https://github.com/user-attachments/assets/675ba18f-295d-4879-a9e9-9d50b189e759" />
-
 <img width="728" height="803" alt="Image" src="https://github.com/user-attachments/assets/e194e177-1aaf-4492-b82f-c9cb20437c60" />
+
+<img width="709" height="740" alt="Image" src="https://github.com/user-attachments/assets/675ba18f-295d-4879-a9e9-9d50b189e759" />
 
 ## The "gray dead zone"
 
