@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# React Gradient Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create gradients that you can use in your CSS
 
-Currently, two official plugins are available:
+Change available options until you generate gradient you like. You can increase precision (the number of in-between colors), change angle and manipulate color-stops (the position of where colors start transitioning from one to the next) using bezier-curve.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img width="709" height="740" alt="Image" src="https://github.com/user-attachments/assets/675ba18f-295d-4879-a9e9-9d50b189e759" />
 
-## Expanding the ESLint configuration
+<img width="728" height="803" alt="Image" src="https://github.com/user-attachments/assets/e194e177-1aaf-4492-b82f-c9cb20437c60" />
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## The "gray dead zone"
 
-- Configure the top-level `parserOptions` property like this:
+I also tried to eliminate the desaturated midsection of gradient that often happens when combining different colors.
+When using RBG color space we are taking the average of three R/G/B channels: Red, Green, Blue
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+We can use different color channels, for example, HSL (hue-saturation-lightness) and then the start and end colors share the same saturation and lightness parameters and hue is changed
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+I used yet another color mode - HCL, which is more suitable for human vision.
+
+## TODO
+
+- add generating random gradients on click
+- add option to change between differen color modes - rbg, hsl etc
