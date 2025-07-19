@@ -11,7 +11,10 @@
 
 Change available options until you generate gradient you like. You can increase precision (the number of in-between colors), change angle and manipulate color-stops (the position of where colors start transitioning from one to the next) using bezier-curve.
 
-<div style="display: flex; gap: 10px; width: 100%; align-items:center;">
+<br />
+<br />
+
+<div align="center">
   <img src="https://github.com/user-attachments/assets/e194e177-1aaf-4492-b82f-c9cb20437c60"
        style="height: 300px; width: auto; object-fit: cover;" />
   <img src="https://github.com/user-attachments/assets/675ba18f-295d-4879-a9e9-9d50b189e759"
