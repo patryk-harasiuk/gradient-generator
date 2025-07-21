@@ -28,8 +28,6 @@
 }
 
 .removeButton {
-  border: none;
-  background: none;
   position: absolute;
   z-index: 0;
   left: 0;

@@ -82,6 +82,18 @@ input[type="color"]::-webkit-color-swatch {
   border: none;
 }
 
+button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
 dialog::backdrop {
   position: fixed;
   left: 0;
