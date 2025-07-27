@@ -43,8 +43,5 @@ export const generateGradientStops = (
     stops.push(percent);
   }
 
-  // stops[0] = 0;
-  // stops[stops.length - 1] = 100;
-
   return stops;
 };
