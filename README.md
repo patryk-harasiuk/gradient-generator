@@ -38,5 +38,5 @@ I used yet another color mode - HCL, which is more suitable for human vision.
 <br />
 <br />
 
-<h6>
-💡 *Idea and design inspired by Josh Comeau: https://www.joshwcomeau.com/gradient-generator/*</h6>
+<em>
+💡 Idea and design inspired by Josh Comeau: https://www.joshwcomeau.com/gradient-generator/</em>
