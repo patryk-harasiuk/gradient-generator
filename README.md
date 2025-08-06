@@ -35,5 +35,5 @@ I used yet another color mode - HCL, which is more suitable for human vision.
 - add generating random gradients on click
 - add option to change between different color modes - RGB, HSL etc
 
-💡 <p fontSize="14px" fontStyle="italic">
-Idea and design inspired by Josh Comeau: https://www.joshwcomeau.com/gradient-generator/</p>
+<p style="font-size:14px; font-style:italic;">
+💡 Idea and design inspired by Josh Comeau: https://www.joshwcomeau.com/gradient-generator/</p>
